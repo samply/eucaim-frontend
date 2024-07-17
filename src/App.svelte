@@ -1,15 +1,12 @@
 <script lang="ts">
 	import options from './config/options.json';
-	import {
-		barChartBackgroundColors,
-		genderHeaders,
-		measures
-	} from './config/environment';
+	import { genderHeaders, measures } from './config/environment';
 	import type { LensDataPasser } from '@samply/lens';
 	import { catalogueText, getStaticCatalogue } from './services/catalogue.service';
 
 	let catalogueopen = false;
-	let catalogueDataPromise = getStaticCatalogue('catalogues/catalogue-example.json');
+	let catalogueCollapsable = true;
+	let catalogueDataPromise = getStaticCatalogue('catalogues/catalogue-eucaim.json');
 
 	let dataPasser: LensDataPasser;
 
@@ -43,16 +40,56 @@
 	// 	dataPasser.removeValueFromQueryAPI({ queryItem, value });
 	// 	getQuery();
 	// };
+	let mobileNavOpen = false;
+	const toggleMobileNav = () => {
+		mobileNavOpen = !mobileNavOpen;
+	};
+
+	window.addEventListener('resize', () => {
+		if (window.innerWidth <= 768) {
+			mobileNavOpen = false;
+			catalogueCollapsable = true;
+		} else if (window.innerWidth > 768 && window.innerWidth < 1024) {
+			mobileNavOpen = true;
+			catalogueCollapsable = true;
+		} else if (window.innerWidth >= 1024) {
+			catalogueCollapsable = false;
+		}
+	});
+
+	if (window.innerWidth >= 1024) {
+		catalogueCollapsable = false;
+	}
 </script>
 
 <header>
 	<div>
-		<!-- Add logo here -->
+		<a href="https://dashboard.eucaim.cancerimage.eu/">
+			<img src="../assets/images/logoEUCAIM_nav@1.5x-8.png" alt="" />
+		</a>
 	</div>
-	<h1>Lens2 Example (Title Here)</h1>
-	<div>
-		<!-- Add logo here -->
-	</div>
+	<button class="burger-menu-button" on:click="{toggleMobileNav}">
+		<div></div>
+		<div></div>
+		<div></div>
+	</button>
+	{#if mobileNavOpen}
+		<div>
+			<nav>
+				<ul>
+					<li>
+						<a href="https://dashboard.eucaim.cancerimage.eu/">HOME</a>
+					</li>
+					<li>
+						<a href="https://catalogue.eucaim.cancerimage.eu/">PUBLIC CATALOGUE</a>
+					</li>
+					<li>
+						<a href="https://help.cancerimage.eu/#login">HELPDESK</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	{/if}
 </header>
 
 <main>
@@ -70,52 +107,20 @@
 	<div class="grid">
 		<div class="catalogue-wrapper">
 			<div class="catalogue">
-				<h2>Suchkriterien</h2>
-				<lens-info-button
-					message="{[
-						`Bei Patienten mit mehreren onkologischen Diagnosen, können sich ausgewählte Suchkriterien nicht nur auf eine Erkrankung beziehen, sondern auch auf Weitere.`,
-						`Innerhalb einer Kategorie werden verschiedene Ausprägungen mit einer „Oder-Verknüpfung“ gesucht; bei der Suche über mehrere Kategorien mit einer „Und-Verknüpfung“.`
-					]}"
-				></lens-info-button>
 				<lens-catalogue
 					toggleIconUrl="right-arrow-svgrepo-com.svg"
 					addIconUrl="long-right-arrow-svgrepo-com.svg"
 					infoIconUrl="info-circle-svgrepo-com.svg"
 					texts="{catalogueText}"
-					toggle="{{ collapsable: false, open: catalogueopen }}"
+					toggle="{{ collapsable: catalogueCollapsable, open: catalogueopen }}"
 				></lens-catalogue>
 			</div>
 		</div>
 		<div class="charts">
 			<div class="chart-wrapper result-summary">
 				<lens-result-summary></lens-result-summary>
-				<lens-search-modified-display
-					>Diagramme repräsentieren nicht mehr die aktuelle Suche!</lens-search-modified-display
-				>
-			</div>
-			<div class="chart-wrapper chart-diagnosis">
-				<lens-chart
-					title="Diagnose"
-					catalogueGroupCode="diagnosis"
-					chartType="bar"
-					indexAxis="y"
-					groupingDivider="."
-					groupingLabel=".%"
-					filterRegex="^[CD].*"
-					xAxisTitle="Anzahl der Diagnosen"
-					yAxisTitle="ICD-10-Codes"
-					backgroundColor="{JSON.stringify(barChartBackgroundColors)}"
-				></lens-chart>
 			</div>
 
-			<div class="chart-wrapper result-table">
-				<lens-result-table pageSize="10">
-					<div slot="above-pagination" class="result-table-hint-text">
-						* Umfasst Gewebe- und flüssige Proben. Die Anzahl der FFPE-Proben (Schätzung)
-						entspricht der Zahl der Diagnosen.
-					</div>
-				</lens-result-table>
-			</div>
 			<div class="chart-wrapper">
 				<lens-chart
 					title="Geschlecht"
@@ -125,40 +130,36 @@
 					headers="{genderHeaders}"
 				></lens-chart>
 			</div>
-			<div class="chart-wrapper chart-age-distribution">
-				<lens-chart
-					title="Alter bei Erstdiagnose"
-					catalogueGroupCode="age_at_diagnosis"
-					chartType="bar"
-					groupRange="{10}"
-					filterRegex="^(1*[12]*[0-9])"
-					xAxisTitle="Alter"
-					yAxisTitle="Anzahl der Primärdiagnosen"
-					backgroundColor="{JSON.stringify(barChartBackgroundColors)}"
-				></lens-chart>
-			</div>
-			<div class="chart-wrapper">
-				<lens-chart
-					title="Proben"
-					catalogueGroupCode="sample_kind"
-					chartType="bar"
-					xAxisTitle="Probentypen"
-					yAxisTitle="Probenanzahl"
-					filterRegex="^(?!(tissue-other|buffy-coat|peripheral-blood-cells|dried-whole-blood|swab|ascites|stool-faeces|saliva|liquid-other|derivative-other))"
-					backgroundColor="{JSON.stringify(barChartBackgroundColors)}"
-				>
-				</lens-chart>
+
+			<div class="chart-wrapper result-table">
+				<lens-result-table pageSize="10"> </lens-result-table>
 			</div>
 		</div>
+	</div>
+
+	<div class="credits">
+		<p>
+			This federated search was made with the open source <a
+				href="https://github.com/samply/">Samply tools</a
+			>
+			(<a href="https://github.com/samply/lens/">Lens</a>,
+			<a href="https://github.com/samply/beam/">Beam</a>,
+			<a href="https://github.com/samply/focus/">Focus</a>,
+			<a href="https://github.com/samply/bridgehead/">Bridgehead</a>), created by the
+			<a href="https://www.dkfz.de/en/verbis/">German Cancer Research Center (DKFZ)</a>.
+		</p>
 	</div>
 </main>
 
 <footer>
-	<div class="made_with">
-		Made with ♥ and <a href="https://github.com/samply/lens">samply/lens-core</a>
-	</div>
 	<div class="logo">
-		<img src="../Deutsches_Krebsforschungszentrum_Logo.svg" alt="Logo des DKFZ" />
+		<a href="https://dashboard.eucaim.cancerimage.eu/">
+			<img src="../assets/images/logo_EUCAIM_footer@2x-8.png" alt="" />
+		</a>
+	</div>
+	<div class="links">
+		<a href="https://dashboard.eucaim.cancerimage.eu/privacy-policy">PRIVACY POLICY</a>
+		<a href="http://localhost:4200/#">COOKIES POLICY</a>
 	</div>
 </footer>
 

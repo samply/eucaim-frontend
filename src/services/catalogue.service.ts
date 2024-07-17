@@ -13,10 +13,5 @@ export function getCatalogueFromServer() {
 
 export const catalogueText = {
     group: 'Group',
-    collapseButtonTitle: 'Collapse Tree',
-    expandButtonTitle: 'Expand Tree',
-    numberInput: {
-        labelFrom: 'von',
-        labelTo: 'bis'
-    }
+    expandButtonTitle: 'Toggle Search Parameters',
 };

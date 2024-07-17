@@ -199,11 +199,10 @@
         "claimedText": "Processing..."
     },
     "resultSummaryOptions": {
-        "title": "Ergebnisse",
-        "infoButtonText": "Um eine Re-Identifizierung zu erschweren, werden Standortergebnisse modifiziert und auf Zehnerstellen gerundet. Meldet ein Standort keinen Treffer, wird für diesen null angezeigt.",
+        "title": "Results",
         "dataTypes": [
             {
-                "title": "Standorte",
+                "title": "Collections",
                 "dataKey": "collections"
             },
             {
