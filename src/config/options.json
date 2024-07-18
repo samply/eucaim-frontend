@@ -176,24 +176,20 @@
     "tableOptions": {
         "headerData": [
             {
-                "title": "Standorte",
-                "dataKey": "site"
+                "title": "Collections",
+                "dataKey": "collections"
             },
             {
-                "title": "Patienten",
-                "dataKey": "patients"
+                "title": "Provider",
+                "dataKey": "provider"
             },
             {
-                "title": "Bioproben*",
-                "aggregatedDataKeys": [
-                    {
-                        "groupCode": "specimen"
-                    },
-                    {
-                        "stratifierCode": "Histologies",
-                        "stratumCode": "1"
-                    }
-                ]
+                "title": "Studies",
+                "dataKey": "studies_count"
+            },
+            {
+                "title": "Subjects",
+                "dataKey": "subject_count"
             }
         ],
         "claimedText": "Processing..."
@@ -211,58 +207,19 @@
             }
         ]
     },
-    "backends": {
-        "spots": [
+    "spots": [
             {
                 "name": "DKTK",
                 "backendMeasures": "DKTK_STRAT_DEF_IN_INITIAL_POPULATION",
-                "url": "http://localhost:8055",
+                "url": "",
                 "sites": [
-                    "berlin-test",
-                    "dresden",
-                    "essen",
-                    "frankfurt",
-                    "freiburg",
-                    "hannover",
-                    "mainz",
-                    "muenchen-lmu",
-                    "muenchen-tum",
-                    "ulm",
-                    "wuerzburg",
-                    "mannheim",
-                    "hamburg"
                 ],
                 "catalogueKeyToResponseKeyMap": [
                     [
-                        "gender",
-                        "Gender"
-                    ],
-                    [
-                        "age_at_diagnosis",
-                        "Age"
-                    ],
-                    [
-                        "diagnosis",
-                        "diagnosis"
-                    ],
-                    [
-                        "medicationStatements",
-                        "MedicationType"
-                    ],
-                    [
-                        "sample_kind",
-                        "sample_kind"
-                    ],
-                    [
-                        "therapy_of_tumor",
-                        "ProcedureType"
-                    ],
-                    [
-                        "75186-7",
-                        "75186-7"
+                        "Studies",
+                        "Studies"
                     ]
                 ]
             }
         ]
-    }
 }

@@ -241,6 +241,7 @@ lens-search-button {
 @media screen and (min-width: 1024px) {
   .charts {
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: max-content;
   }
 }
 
@@ -259,6 +260,7 @@ lens-search-button {
 
   .result-table {
     grid-column: span 2;
+    grid-template-rows: min-content;
   }
 
 }
@@ -271,11 +273,6 @@ lens-search-button {
 .credits a {
   color: var(--orange);
   margin: 0;
-}
-
-
-footer {
-  justify-content: center;
 }
 
 footer .logo {
@@ -310,6 +307,9 @@ footer .links {
 
 lens-search-bar-multiple::part(lens-searchbar-chip) {
   background-color: var(--light-blue);
+}
+lens-search-bar-multiple::part(lens-searchbar-or-indicator) {
+  color: var(--white);
 }
 
 lens-search-bar-multiple::part(info-button),

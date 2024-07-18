@@ -1,8 +1,10 @@
 <script lang="ts">
 	import options from './config/options.json';
-	import { genderHeaders, measures } from './config/environment';
-	import type { LensDataPasser } from '@samply/lens';
+	import { measures } from './config/environment';
+	import type { LensDataPasser, QueryEvent } from '@samply/lens';
 	import { catalogueText, getStaticCatalogue } from './services/catalogue.service';
+	import ResultTable from './components/ResultTable.svelte';
+	import { backendCall } from './services/backend.service';
 
 	let catalogueopen = false;
 	let catalogueCollapsable = true;
@@ -60,6 +62,18 @@
 	if (window.innerWidth >= 1024) {
 		catalogueCollapsable = false;
 	}
+
+	/**
+	 * This event listener is triggered when the user clicks the search button
+	 */
+
+	let response: void;
+
+	window.addEventListener('emit-lens-query', (e) => {
+		const event = e as QueryEvent;
+		const { ast, updateResponse, abortController } = event.detail;
+		response = backendCall(ast, updateResponse, abortController);
+	});
 </script>
 
 <header>
@@ -123,16 +137,15 @@
 
 			<div class="chart-wrapper">
 				<lens-chart
-					title="Geschlecht"
-					catalogueGroupCode="gender"
+					title="Studies per Collection"
+					catalogueGroupCode="Studies"
 					chartType="pie"
 					displayLegends="{true}"
-					headers="{genderHeaders}"
 				></lens-chart>
 			</div>
 
 			<div class="chart-wrapper result-table">
-				<lens-result-table pageSize="10"> </lens-result-table>
+				<ResultTable options="{options.tableOptions}" {response} />
 			</div>
 		</div>
 	</div>
