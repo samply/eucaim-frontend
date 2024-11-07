@@ -10,8 +10,8 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write ./**/*.{js,svelte,html,ts}",
-		"lint": "eslint './src/**/*.{js,ts,svelte}'",
-		"lint:fix": "eslint --fix './src/**/*.{js,ts,svelte}'",
+		"lint": "eslint \"./src/**/*.{js,ts,svelte}\"",
+		"lint:fix": "eslint --fix \"./src/**/*.{js,ts,svelte}\"",
 		"prelint": "npm run format",
 		"test:integration": "playwright test",
 		"test:unit": "vitest",
@@ -43,6 +43,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@samply/lens": "^0.2.2"
+		"@samply/lens": "^0.4.3"
 	}
 }

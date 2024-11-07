@@ -1,17 +1,52 @@
 <script lang="ts">
-	import options from './config/options.json';
 	import { measures } from './config/environment';
+	import options from './config/options.json';
 	import type { LensDataPasser, QueryEvent } from '@samply/lens';
-	import { catalogueText, getStaticCatalogue } from './services/catalogue.service';
+	import { catalogueText, fetchData } from './services/catalogue.service';
 	import ResultTable from './components/ResultTable.svelte';
 	import { backendCall } from './services/backend.service';
+	//import { requestBackend } from './services/backend.service';
+	//import type { Site } from '@samply/lens';
 
 	let catalogueopen = false;
 	let catalogueCollapsable = true;
-	let catalogueDataPromise = getStaticCatalogue('catalogues/catalogue-eucaim.json');
+
+	const catalogueUrl = 'catalogues/catalogue-eucaim.json';
+	const optionsFilePath = 'config/options.json';
+
+	const jsonPromises: Promise<{
+		catalogueJSON: string;
+		optionsJSON: string;
+	}> = fetchData(catalogueUrl, optionsFilePath);
+
+	//let catalogueDataPromise = getStaticCatalogue('catalogues/catalogue-eucaim.json');
 
 	let dataPasser: LensDataPasser;
+	/*
+	export type Provider = {
+		provider: string;
+		provider_icon?: string;
+		collections: CollectionItem[];
+	};
 
+	type CollectionItem = {
+		name: string;
+		id: string;
+		provider_icon?: string;
+		provider?: string;
+		studies_count: number;
+		subjects_count: number;
+		age_range: {
+			min: number;
+			max: number;
+		};
+		gender: string[];
+		modality?: string[];
+		modalities?: string[];
+		body_parts: string[];
+		description: string;
+	};
+*/
 	/**
 	 * The following functions are the API to the library stores (state)
 	 * here you get information to use in your application
@@ -67,12 +102,17 @@
 	 * This event listener is triggered when the user clicks the search button
 	 */
 
-	let response: void;
+	//let response: (response: Map<string, Site>) => void;
 
 	window.addEventListener('emit-lens-query', (e) => {
 		const event = e as QueryEvent;
 		const { ast, updateResponse, abortController } = event.detail;
-		response = backendCall(ast, updateResponse, abortController);
+		backendCall(ast, updateResponse, abortController);
+		//backendCall(ast, updateResponse, abortController);
+		//backendCall(ast, (response: Provider[]) => [], abortController)
+		console.log('emit');
+		console.log(updateResponse);
+		//response = updateResponse;
 	});
 </script>
 
@@ -145,7 +185,7 @@
 			</div>
 
 			<div class="chart-wrapper result-table">
-				<ResultTable options="{options.tableOptions}" {response} />
+				<ResultTable options="{options.tableOptions}" />
 			</div>
 		</div>
 	</div>
@@ -176,12 +216,13 @@
 	</div>
 </footer>
 
-{#await catalogueDataPromise}
-	Loading catalogue...
-{:then catalogueData}
-	<lens-options {options} {catalogueData} {measures}></lens-options>
+<!-- here it waits on all promises to resolve and fills in the parameters -->
+{#await jsonPromises}
+	Loading data...
+{:then { optionsJSON, catalogueJSON }}
+	<lens-options {catalogueJSON} {optionsJSON} {measures}></lens-options>
 {:catch someError}
-	System error: {someError.message}.
+	System error: {someError.message}
 {/await}
 
 <lens-data-passer bind:this="{dataPasser}"></lens-data-passer>
