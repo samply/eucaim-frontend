@@ -4,9 +4,7 @@
 	import type { LensDataPasser, QueryEvent } from '@samply/lens';
 	import { catalogueText, fetchData } from './services/catalogue.service';
 	import ResultTable from './components/ResultTable.svelte';
-	import { backendCall } from './services/backend.service';
-	//import { requestBackend } from './services/backend.service';
-	//import type { Site } from '@samply/lens';
+	import { requestBackend } from './services/backend.service';
 
 	let catalogueopen = false;
 	let catalogueCollapsable = true;
@@ -22,31 +20,7 @@
 	//let catalogueDataPromise = getStaticCatalogue('catalogues/catalogue-eucaim.json');
 
 	let dataPasser: LensDataPasser;
-	/*
-	export type Provider = {
-		provider: string;
-		provider_icon?: string;
-		collections: CollectionItem[];
-	};
 
-	type CollectionItem = {
-		name: string;
-		id: string;
-		provider_icon?: string;
-		provider?: string;
-		studies_count: number;
-		subjects_count: number;
-		age_range: {
-			min: number;
-			max: number;
-		};
-		gender: string[];
-		modality?: string[];
-		modalities?: string[];
-		body_parts: string[];
-		description: string;
-	};
-*/
 	/**
 	 * The following functions are the API to the library stores (state)
 	 * here you get information to use in your application
@@ -102,17 +76,11 @@
 	 * This event listener is triggered when the user clicks the search button
 	 */
 
-	//let response: (response: Map<string, Site>) => void;
 
 	window.addEventListener('emit-lens-query', (e) => {
 		const event = e as QueryEvent;
 		const { ast, updateResponse, abortController } = event.detail;
-		backendCall(ast, updateResponse, abortController);
-		//backendCall(ast, updateResponse, abortController);
-		//backendCall(ast, (response: Provider[]) => [], abortController)
-		console.log('emit');
-		console.log(updateResponse);
-		//response = updateResponse;
+		requestBackend(ast, updateResponse, abortController);
 	});
 </script>
 

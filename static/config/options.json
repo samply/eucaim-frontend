@@ -23,6 +23,12 @@
         "dktk-test": "DKTK-Test",
         "hamburg": "Hamburg"
     },
+    "catalogueKeyToResponseKeyMap": [
+        [
+            "Studies",
+            "Studies"
+        ]
+    ],
     "chartOptions": {
         "patients": {
             "legendMapping": {
@@ -198,67 +204,28 @@
         "title": "Results",
         "dataTypes": [
             {
-                "title": "Collections",
-                "dataKey": "collections"
+                "title": "Provider",
+                "dataKey": "provider"
             },
             {
-                "title": "Patienten",
-                "dataKey": "patients"
+                "title": "Collections",
+                "dataKey": "collections"
             }
         ]
     },
-    "backends": {
-        "spots": [
-            {
-                "name": "DKTK",
-                "backendMeasures": "DKTK_STRAT_DEF_IN_INITIAL_POPULATION",
-                "url": "http://localhost:8055",
-                "sites": [
-                    "berlin-test",
-                    "dresden",
-                    "essen",
-                    "frankfurt",
-                    "freiburg",
-                    "hannover",
-                    "mainz",
-                    "muenchen-lmu",
-                    "muenchen-tum",
-                    "ulm",
-                    "wuerzburg",
-                    "mannheim",
-                    "hamburg"
-                ],
-                "catalogueKeyToResponseKeyMap": [
-                    [
-                        "gender",
-                        "Gender"
-                    ],
-                    [
-                        "age_at_diagnosis",
-                        "Age"
-                    ],
-                    [
-                        "diagnosis",
-                        "diagnosis"
-                    ],
-                    [
-                        "medicationStatements",
-                        "MedicationType"
-                    ],
-                    [
-                        "sample_kind",
-                        "sample_kind"
-                    ],
-                    [
-                        "therapy_of_tumor",
-                        "ProcedureType"
-                    ],
-                    [
-                        "75186-7",
-                        "75186-7"
-                    ]
+    "spots": [
+        {
+            "name": "DKTK",
+            "backendMeasures": "DKTK_STRAT_DEF_IN_INITIAL_POPULATION",
+            "url": "",
+            "sites": [
+            ],
+            "catalogueKeyToResponseKeyMap": [
+                [
+                    "Studies",
+                    "Studies"
                 ]
-            }
-        ]
-    }
+            ]
+        }
+    ]
 }
