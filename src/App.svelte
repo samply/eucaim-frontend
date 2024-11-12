@@ -116,13 +116,13 @@
 <main>
 	<div class="search">
 		<div class="search-wrapper">
-			<lens-search-bar-multiple noMatchesFoundMessage="{'keine Ergebnisse gefunden'}"
+			<lens-search-bar-multiple noMatchesFoundMessage="{'No collections found'}"
 			></lens-search-bar-multiple>
 			<lens-info-button
-				noQueryMessage="Leere Suchanfrage: Sucht nach allen Ergebnissen."
+				noQueryMessage="Query with no criteria selected: Searches for all collections."
 				showQuery="{true}"
 			></lens-info-button>
-			<lens-search-button title="Suchen"></lens-search-button>
+			<lens-search-button title="Search"></lens-search-button>
 		</div>
 	</div>
 	<div class="grid">

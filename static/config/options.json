@@ -218,13 +218,5 @@
         ]
     },
     "backends": {
-        "spots": [
-            {
-                "name": "DKTK",
-                "backendMeasures": "DKTK_STRAT_DEF_IN_INITIAL_POPULATION",
-                "url": "http://localhost:8055",
-                "sites": ["procanceri", "chaimeleon"]
-            }
-        ]
     }
 }
