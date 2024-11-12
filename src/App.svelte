@@ -76,7 +76,6 @@
 	 * This event listener is triggered when the user clicks the search button
 	 */
 
-
 	window.addEventListener('emit-lens-query', (e) => {
 		const event = e as QueryEvent;
 		const { ast, updateResponse, abortController } = event.detail;

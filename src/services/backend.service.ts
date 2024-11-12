@@ -1,6 +1,5 @@
 import type { AstTopLayer, Site } from '@samply/lens';
-import {Spot} from "./spot";
-
+import { Spot } from './spot';
 
 // studies per collection = aggregated values of studies_count -> getAggregatedPopulationForStratumCode()
 
@@ -23,7 +22,6 @@ export const requestBackend = (
 		)
 	};
 
-
 	let backendUrl: string = '';
 	/**
 	 * TODO: add different backend URLs for different environments
@@ -34,9 +32,8 @@ export const requestBackend = (
 	// } else if (import.meta.env.VITE_TARGET_ENVIRONMENT === "staging") {
 	//backendUrl = 'https://locator-dev.bbmri-eric.eu/backend/';
 	// } else {
-	     backendUrl = "http://localhost:8055";
+	backendUrl = 'http://localhost:8055';
 	// }
-
 
 	const backend = new Spot(
 		new URL(backendUrl),
@@ -67,5 +64,4 @@ export const requestBackend = (
 	// } catch (error) {
 	//     console.error('Error:', error);
 	// }
-
 };

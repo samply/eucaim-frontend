@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type {LensDataPasser} from '@samply/lens';
-	import type {Provider} from "../Types/types";
+	import type { LensDataPasser } from '@samply/lens';
+	import type { Provider } from '../Types/types';
 	export let options = {
 		headerData: [],
 		claimedText: ''
@@ -9,7 +9,8 @@
 	let response: Provider[] = [];
 	let expanded: boolean[] = new Array(1).fill(false);
 	let dataPasser: LensDataPasser;
-	let catalogueLink: string = "https://catalogue.eucaim.cancerimage.eu/menu/main/app-molgenis-app-biobank-explorer-eucaim/#/collection/"
+	let catalogueLink: string =
+		'https://catalogue.eucaim.cancerimage.eu/menu/main/app-molgenis-app-biobank-explorer-eucaim/#/collection/';
 
 	const toggleExpand = (index: string) => {
 		expanded[index] = !expanded[index];
@@ -18,10 +19,10 @@
 		img.classList.toggle('expand-button-img-rotate');
 	};
 
-	window.addEventListener("lens-responses-updated", ()=> {
+	window.addEventListener('lens-responses-updated', () => {
 		response = Array.from(
-				dataPasser?.getResponseAPI().values(),
-				(x) => x.data.extension[0] as Provider
+			dataPasser?.getResponseAPI().values(),
+			(x) => x.data.extension[0] as Provider
 		);
 	});
 
@@ -40,9 +41,8 @@
 			});
 		})
 	})*/
-
-
 </script>
+
 <table cellspacing="0" class="result-table">
 	<thead class="table-header">
 		<tr class="table-header-row">
@@ -62,7 +62,7 @@
 					class:expanded-row="{expanded[index1.toString() + index2.toString()]}"
 				>
 					<td class="table-cell table-cell-name" style="width:30%">
-						<a href="{catalogueLink}{tableRow.id}" target=”_blank”>{tableRow.name}</a>
+						<a href="{catalogueLink}{tableRow.id}" target="_blank">{tableRow.name}</a>
 					</td>
 					<td class="table-cell" style="width:30%">
 						{#if provider.provider_icon}

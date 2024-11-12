@@ -3,7 +3,7 @@
  */
 
 import type { ResponseStore, Site, Status, BeamResult } from '@samply/lens';
-import type {Provider} from "../Types/types";
+import type { Provider } from '../Types/types';
 
 export class Spot {
 	constructor(
@@ -64,13 +64,14 @@ export class Spot {
 				const site: string = response.from.split('.')[1];
 				const status: Status = response.status;
 				//const body: SiteData = status === 'succeeded' ? JSON.parse(atob(response.body)) : null;
-				const body: Provider = status === 'succeeded' ? JSON.parse(atob(response.body)) : null;
+				const body: Provider =
+					status === 'succeeded' ? JSON.parse(atob(response.body)) : null;
 
 				//const parsedResponse: ResponseStore = new Map().set(site, {
 				//	status: status,
 				//	data: body
 				//});
-				const parsedResponse: ResponseStore = this.transformResponse(site, status, body)
+				const parsedResponse: ResponseStore = this.transformResponse(site, status, body);
 				updateResponse(parsedResponse);
 			});
 
@@ -92,7 +93,7 @@ export class Spot {
 				console.log(`Aborting request ${this.currentTask}`);
 			} else {
 				console.error(err);
-				console.log('Mock-Response')
+				console.log('Mock-Response');
 				const response: Provider[] = [
 					{
 						provider: 'ProCancerI',
@@ -116,6 +117,43 @@ export class Spot {
 							},
 							{
 								name: 'ProCAncer-I Use Case 2',
+								id: '321e707a9c82cab4721c80e7aa30f2f8',
+								description:
+									'This dataset contains a collection of patients with confirmed PCa at biopsy and/or prostatectomy.',
+								subjects_count: 5432,
+								studies_count: 5434,
+								age_range: {
+									min: 0,
+									max: 91
+								},
+								modalities: ['MR', 'SC'],
+								body_parts: ['Prostate'],
+								gender: ['Male']
+							}
+						]
+					},
+					{
+						provider: 'Testprovider',
+						provider_icon:
+							'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',
+						collections: [
+							{
+								name: 'Test 1',
+								id: 'ea3649c3524b0886fad16472354ee9f6',
+								description:
+									'This dataset contains a collection of patients with no PCa confirmed at pathology (or patients with no PCa findings on MRI and confirmed negative at follow-up (at least 1 year)) and collection of patients with confirmed PCa at biopsy and/or prostatectomy.',
+								subjects_count: 8826,
+								studies_count: 8848,
+								age_range: {
+									min: 0,
+									max: 91
+								},
+								modalities: ['MR', 'SC'],
+								body_parts: ['Prostate'],
+								gender: ['Male']
+							},
+							{
+								name: 'Test 2',
 								id: '321e707a9c82cab4721c80e7aa30f2f8',
 								description:
 									'This dataset contains a collection of patients with confirmed PCa at biopsy and/or prostatectomy.',
@@ -445,7 +483,14 @@ export class Spot {
 								},
 								gender: ['Female', 'Male', 'Unkown'],
 								modality: ['MG', 'MR', 'CT', 'CR', 'Unknown'],
-								body_parts: ['BREAST', 'HEAD', 'ABDOMEN', 'CHEST', 'MAMOGRAFIA', 'Unknown'],
+								body_parts: [
+									'BREAST',
+									'HEAD',
+									'ABDOMEN',
+									'CHEST',
+									'MAMOGRAFIA',
+									'Unknown'
+								],
 								description:
 									'All Patient Cases (images and clinical data) collected until 23/04/2024 in the CHAIMELEON Repository related to Breast cancer.'
 							},
@@ -531,10 +576,24 @@ export class Spot {
 					}
 				];
 
-				const parsedResponse: ResponseStore = this.transformResponse("site1", "succeeded", response[0])
-				const parsedResponse2: ResponseStore = this.transformResponse("site2", "succeeded", response[1])
+				const parsedResponse: ResponseStore = this.transformResponse(
+					'site1',
+					'succeeded',
+					response[0]
+				);
+				const parsedResponse2: ResponseStore = this.transformResponse(
+					'site2',
+					'succeeded',
+					response[1]
+				);
+				const parsedResponse3: ResponseStore = this.transformResponse(
+					'site3',
+					'succeeded',
+					response[2]
+				);
 				updateResponse(parsedResponse);
 				updateResponse(parsedResponse2);
+				updateResponse(parsedResponse3);
 			}
 		}
 	}
@@ -549,7 +608,7 @@ export class Spot {
 				group: [
 					{
 						code: {
-							text: "Studies"
+							text: 'Studies'
 						},
 						population: [
 							{
@@ -569,9 +628,9 @@ export class Spot {
 						],
 						stratifier: [
 							{
-								code: [{text: "Studies"}],
+								code: [{ text: 'Studies' }],
 								stratum: provider.collections.map((collection) => ({
-									value: {text: collection.name},
+									value: { text: collection.name },
 									population: [
 										{
 											count: collection.studies_count,
@@ -586,12 +645,32 @@ export class Spot {
 										}
 									]
 								}))
-
 							}
 						]
-
-
-					}],
+					},
+					{
+						code: {
+							text: 'Subjects'
+						},
+						population: [
+							{
+								count: provider.collections.reduce(
+									(acc, curr) => acc + curr.subjects_count,
+									0
+								),
+								code: {
+									coding: [
+										{
+											system: '',
+											code: ''
+										}
+									]
+								}
+							}
+						],
+						stratifier: []
+					}
+				],
 				date: '',
 				period: {},
 				measure: '',
@@ -602,6 +681,6 @@ export class Spot {
 		};
 
 		transformedResponse.set(site, providerData);
-		return transformedResponse
+		return transformedResponse;
 	}
 }
