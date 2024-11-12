@@ -37,7 +37,7 @@ export const requestBackend = (
 
 	const backend = new Spot(
 		new URL(backendUrl),
-		['uppsala-test', 'eric-test', 'prague-uhkt-test'],
+		['procanceri', 'chaimeleon'],
 		queryId
 	);
 
