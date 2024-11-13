@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - develop
-      - feat/firstDraft
+      - eucaim-datamodel
   pull_request:
     branches:
       - develop
