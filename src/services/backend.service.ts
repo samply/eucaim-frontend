@@ -30,9 +30,9 @@ export const requestBackend = (
 	// if (import.meta.env.VITE_TARGET_ENVIRONMENT === "production") {
 	//     backendUrl = "https://locator-dev.bbmri-eric.eu/backend";
 	// } else if (import.meta.env.VITE_TARGET_ENVIRONMENT === "staging") {
-	//backendUrl = 'https://locator-dev.bbmri-eric.eu/backend/';
+	backendUrl = 'https://explorer-eucaim.grycap.i3m.upv.es/backend/';
 	// } else {
-	backendUrl = 'http://localhost:8055';
+	// backendUrl = 'http://localhost:8055';
 	// }
 
 	const backend = new Spot(
