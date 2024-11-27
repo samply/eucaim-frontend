@@ -17,5 +17,8 @@ export default defineConfig({
 	},
 	optimizeDeps: {
 		exclude: ['@samply/lens']
+	},
+	ssr: {
+		noExternal: ['@samply/lens'], // Mark package as noExternal if SSR issues
 	}
 });
