@@ -23,17 +23,15 @@ export const requestBackend = (
 	};
 
 	let backendUrl: string = '';
-	/**
-	 * TODO: add different backend URLs for different environments
-	 */
 
-	// if (import.meta.env.VITE_TARGET_ENVIRONMENT === "production") {
-	//     backendUrl = "https://locator-dev.bbmri-eric.eu/backend";
-	// } else if (import.meta.env.VITE_TARGET_ENVIRONMENT === "staging") {
-	backendUrl = 'https://explorer-eucaim.grycap.i3m.upv.es/backend/';
-	// } else {
-	// backendUrl = 'http://localhost:8055';
-	// }
+	if (import.meta.env.VITE_TARGET_ENVIRONMENT === "production") {
+	    backendUrl = "https://explorer.eucaim.cancerimage.eu/backend/";
+	} else if (import.meta.env.VITE_TARGET_ENVIRONMENT === "staging") {
+		// TODO: Change back to test instance after merge to main
+		backendUrl = 'https://explorer.eucaim.cancerimage.eu/backend/';
+	} else {
+		backendUrl = 'http://localhost:8055';
+	}
 
 	const backend = new Spot(
 		new URL(backendUrl),
