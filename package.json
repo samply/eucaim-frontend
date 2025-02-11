@@ -16,6 +16,7 @@
 		"prelint": "npm run format",
 		"test:integration": "playwright test",
 		"test:unit": "vitest",
+		"security:check": "npm audit",
 		"prepare": "husky install"
 	},
 	"devDependencies": {
