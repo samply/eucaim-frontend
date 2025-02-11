@@ -8,11 +8,17 @@ export default defineConfig({
 	},
 	server: {
 		proxy: {
-		  '/api': {
-			target: 'http://localhost:1337',
-			changeOrigin: true,
-			rewrite: path => path.replace(/^\/api/, '')
-		  }
+			'/api': {
+				target: 'http://localhost:1337',
+				changeOrigin: true,
+				rewrite: (path) => path.replace(/^\/api/, '')
+			}
 		}
-	  }
+	},
+	optimizeDeps: {
+		exclude: ['@samply/lens']
+	},
+	ssr: {
+		noExternal: ['@samply/lens'], // Mark package as noExternal if SSR issues
+	}
 });
