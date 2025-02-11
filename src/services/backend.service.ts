@@ -28,7 +28,7 @@ export const requestBackend = (
 	    backendUrl = "https://explorer.eucaim.cancerimage.eu/backend/";
 	} else if (import.meta.env.VITE_TARGET_ENVIRONMENT === "staging") {
 		// TODO: Change back to test instance after merge to main
-		backendUrl = 'https://explorer.eucaim.cancerimage.eu/backend/';
+		backendUrl = 'https://explorer-eucaim.grycap.i3m.upv.es/backend/';
 	} else {
 		backendUrl = 'http://localhost:8055';
 	}
