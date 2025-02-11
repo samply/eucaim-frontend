@@ -43,7 +43,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@samply/lens": "0.4.4-1",
+		"@samply/lens": "0.4.6-0",
 		"@sveltejs/adapter-node": "^5.2.9"
 	}
 }
