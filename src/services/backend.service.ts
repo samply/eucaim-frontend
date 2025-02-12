@@ -35,7 +35,7 @@ export const requestBackend = (
 
 	const backend = new Spot(
 		new URL(backendUrl),
-		['procanceri', 'chaimeleon', 'incisive'],
+		['procanceri', 'chaimeleon', 'incisive', 'upv-node'],
 		queryId
 	);
 
