@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - develop
-      - eucaim-datamodel
   pull_request:
     branches:
       - develop
+  workflow_dispatch:
 jobs:
   build:
     # Necessary after this repository was renamed from samply/lens-web-components to samply/lens
