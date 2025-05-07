@@ -10,7 +10,7 @@
 	let expanded: boolean[] = new Array(1).fill(false);
 	let dataPasser: LensDataPasser;
 	let catalogueLink: string =
-		'https://catalogue.eucaim.cancerimage.eu/menu/main/app-molgenis-app-biobank-explorer-eucaim/#/collection/';
+		'https://catalogue.eucaim.cancerimage.eu/Eucaim/eucaim-ui/#/dataset/';
 
 	const toggleExpand = (index: string) => {
 		expanded[index] = !expanded[index];
