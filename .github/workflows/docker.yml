@@ -31,7 +31,7 @@ jobs:
       build-args: |
         TARGET_ENVIRONMENT=production
       build-platforms: "linux/amd64"
-      push-to: dockerhub
+      push-to: docker.io
     # This passes the secrets from calling workflow to the called workflow
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
