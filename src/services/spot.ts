@@ -8,9 +8,9 @@ import type { Provider } from '../Types/types';
 export class Spot {
 	constructor(
 		private url: URL,
-		private sites: Array<string>,
 		private currentTask: string
 	) {}
+	private sites: Array<string> = ['proxy2']
 
 	/**
 	 * sends the query to beam and updates the store with the results

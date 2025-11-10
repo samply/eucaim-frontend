@@ -29,12 +29,11 @@ export const requestBackend = (
 	} else if (import.meta.env.VITE_TARGET_ENVIRONMENT === "staging") {
 	  backendUrl = "https://explorer.eucaim.cancerimage.eu/backend/";
 	} else {
-		backendUrl = 'http://localhost:8055';
+		backendUrl = 'http://localhost:8055/';
 	}
 
 	const backend = new Spot(
 		new URL(backendUrl),
-		['procanceri', 'chaimeleon', 'incisive', 'upv-node', 'huvr', 'auth'],
 		queryId
 	);
 
