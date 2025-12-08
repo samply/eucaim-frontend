@@ -185,12 +185,13 @@
             },
             {
                 "title": "Imaging Studies",
-                "dataKey": "studies_count",
-                "tooltip": "not distinct subjects"
+                "dataKey": "studies_count"
             },
             {
                 "title": "Subjects",
-                "dataKey": "subject_count"
+                "dataKey": "subject_count",
+                "tooltip": "not necessarily distinct subjects"
+
             }
         ],
         "claimedText": "Processing..."
