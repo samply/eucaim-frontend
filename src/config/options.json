@@ -184,8 +184,9 @@
                 "dataKey": "provider"
             },
             {
-                "title": "Studies",
-                "dataKey": "studies_count"
+                "title": "Imaging Studies",
+                "dataKey": "studies_count",
+                "tooltip": "not distinct subjects"
             },
             {
                 "title": "Subjects",

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import './app.css';
 	import { browser } from '$app/environment';
+	//used for tooltip
+	import { onMount } from 'svelte';
 
 	// conditional import for SSR
 	if (browser) import('@samply/lens');
@@ -86,6 +88,25 @@
 		const event = e as QueryEvent;
 		const { ast, updateResponse, abortController } = event.detail;
 		requestBackend(ast, updateResponse, abortController);
+	});
+
+		// Add tooltips to table headers after component mounts
+	onMount(() => {
+		const headers = document.querySelectorAll('.table-header-cell');
+		headers.forEach((header, index) => {
+			const headerData = options.tableOptions.headerData[index];
+			if (headerData && headerData.tooltip) {
+				// Create tooltip icon
+				const tooltipIcon = document.createElement('img');
+				tooltipIcon.src = options.iconOptions.infoUrl;
+				tooltipIcon.className = 'header-tooltip-icon';
+				tooltipIcon.title = headerData.tooltip;
+				tooltipIcon.alt = 'info';
+				
+				// Append icon to header
+				header.appendChild(tooltipIcon);
+			}
+		});
 	});
 </script>
 
@@ -199,3 +220,17 @@
 {/await}
 
 <lens-data-passer bind:this="{dataPasser}"></lens-data-passer>
+
+<style>
+	:global(.header-tooltip-icon) {
+		width: 14px;
+		height: 14px;
+		margin-left: 6px;
+		vertical-align: middle;
+		opacity: 0.7;
+	}
+	
+	:global(.header-tooltip-icon:hover) {
+		opacity: 1;
+	}
+</style>
