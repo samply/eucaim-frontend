@@ -59,7 +59,7 @@
 			{#each provider.collections as tableRow, index2}
 				<tr
 					class="table-row"
-					class:expanded-row="{expanded[index1.toString() + index2.toString()]}"
+					class:expanded-row={expanded[index1.toString() + index2.toString()]}
 				>
 					<td class="table-cell table-cell-name" style="width:30%">
 						<a href="{catalogueLink}{tableRow.id}" target="_blank">{tableRow.name}</a>
@@ -79,7 +79,7 @@
 					<td class="table-cell" style="width:4%">
 						<button
 							class="expand-button"
-							on:click="{() => toggleExpand(index1.toString() + index2.toString())}"
+							on:click={() => toggleExpand(index1.toString() + index2.toString())}
 							><img
 								class="expand-button-img expand-button-img-rotate"
 								id="expand-button-img-{index1.toString() + index2.toString()}"
@@ -94,16 +94,16 @@
 						<td class="table-cell-hidden" colspan="5">
 							<div class="table-cell-hidden-data-wrapper">
 								<table class="collection-table">
-										<tbody>
-											<tr class="table-row">
+									<tbody>
+										<tr class="table-row">
 											<td class="collection-name">Age range: </td><td
 												class="collection-value"
 												>{tableRow.age_range.min} to {tableRow.age_range.max}</td
 											>
 										</tr>
 										<tr class="table-row">
-											<td class="collection-name">Gender: </td><td class="collection-value"
-												>{tableRow.gender.join(', ')}</td
+											<td class="collection-name">Gender: </td><td
+												class="collection-value">{tableRow.gender.join(', ')}</td
 											>
 										</tr>
 										<tr class="table-row">
