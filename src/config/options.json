@@ -190,7 +190,7 @@
             {
                 "title": "Subjects",
                 "dataKey": "subject_count",
-                "tooltip": "not necessarily distinct subjects"
+                "tooltip": "Not necessarily distinct subjects; subjects between different collections might not be de-duplicated."
 
             }
         ],
