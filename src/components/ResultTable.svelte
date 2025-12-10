@@ -94,16 +94,16 @@
 						<td class="table-cell-hidden" colspan="5">
 							<div class="table-cell-hidden-data-wrapper">
 								<table class="collection-table">
-									<tbody>
-										<tr class="table-row">
+										<tbody>
+											<tr class="table-row">
 											<td class="collection-name">Age range: </td><td
 												class="collection-value"
 												>{tableRow.age_range.min} to {tableRow.age_range.max}</td
 											>
-										{/if}
-										{#if tableRow.modalities}
-											<td class="collection-name">Modality: </td><td
-												class="collection-value">{tableRow.modalities.join(', ')}</td
+										</tr>
+										<tr class="table-row">
+											<td class="collection-name">Gender: </td><td class="collection-value"
+												>{tableRow.gender.join(', ')}</td
 											>
 										</tr>
 										<tr class="table-row">

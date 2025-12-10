@@ -116,7 +116,7 @@
 			<img src="../assets/images/logoEUCAIM_nav@1.5x-8.png" alt="" />
 		</a>
 	</div>
-	<button class="burger-menu-button" on:click="{toggleMobileNav}">
+	<button class="burger-menu-button" on:click="{toggleMobileNav}" aria-label="Toggle navigation menu">
 		<div></div>
 		<div></div>
 		<div></div>
