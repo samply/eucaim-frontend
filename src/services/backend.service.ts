@@ -27,15 +27,14 @@ export const requestBackend = (
 	if (import.meta.env.VITE_TARGET_ENVIRONMENT === "production") {
 	    backendUrl = "https://explorer.eucaim.cancerimage.eu/backend/";
 	} else if (import.meta.env.VITE_TARGET_ENVIRONMENT === "staging") {
-		// TODO: Change back to test instance after merge to main
-		backendUrl = 'https://explorer-eucaim.grycap.i3m.upv.es/backend/';
+	  backendUrl = "https://explorer.eucaim.cancerimage.eu/backend/";
 	} else {
 		backendUrl = 'http://localhost:8055';
 	}
 
 	const backend = new Spot(
 		new URL(backendUrl),
-		['procanceri', 'chaimeleon', 'incisive', 'upv-node'],
+		['procanceri', 'chaimeleon', 'incisive', 'upv-node', 'huvr', 'auth'],
 		queryId
 	);
 
