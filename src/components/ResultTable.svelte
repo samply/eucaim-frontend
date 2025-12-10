@@ -94,39 +94,41 @@
 						<td class="table-cell-hidden" colspan="5">
 							<div class="table-cell-hidden-data-wrapper">
 								<table class="collection-table">
-									<tr class="table-row">
-										<td class="collection-name">Age range: </td><td
-											class="collection-value"
-											>{tableRow.age_range.min} to {tableRow.age_range.max}</td
-										>
-									</tr>
-									<tr class="table-row">
-										<td class="collection-name">Gender: </td><td class="collection-value"
-											>{tableRow.gender.join(', ')}</td
-										>
-									</tr>
-									<tr class="table-row">
-										{#if tableRow.modality}
-											<td class="collection-name">Modality: </td><td
-												class="collection-value">{tableRow.modality.join(', ')}</td
+									<tbody>
+										<tr class="table-row">
+											<td class="collection-name">Age range: </td><td
+												class="collection-value"
+												>{tableRow.age_range.min} to {tableRow.age_range.max}</td
 											>
 										{/if}
 										{#if tableRow.modalities}
 											<td class="collection-name">Modality: </td><td
 												class="collection-value">{tableRow.modalities.join(', ')}</td
 											>
-										{/if}
-									</tr>
-									<tr class="table-row">
-										<td class="collection-name">Body parts: </td><td
-											class="collection-value">{tableRow.body_parts.join(', ')}</td
-										>
-									</tr>
-									<tr class="table-row">
-										<td class="collection-name">Description: </td><td
-											class="collection-value">{tableRow.description}</td
-										>
-									</tr>
+										</tr>
+										<tr class="table-row">
+											{#if tableRow.modality}
+												<td class="collection-name">Modality: </td><td
+													class="collection-value">{tableRow.modality.join(', ')}</td
+												>
+											{/if}
+											{#if tableRow.modalities}
+												<td class="collection-name">Modality: </td><td
+													class="collection-value">{tableRow.modalities.join(', ')}</td
+												>
+											{/if}
+										</tr>
+										<tr class="table-row">
+											<td class="collection-name">Body parts: </td><td
+												class="collection-value">{tableRow.body_parts.join(', ')}</td
+											>
+										</tr>
+										<tr class="table-row">
+											<td class="collection-name">Description: </td><td
+												class="collection-value">{tableRow.description}</td
+											>
+										</tr>
+									</tbody>
 								</table>
 							</div>
 						</td>
@@ -136,7 +138,7 @@
 		{/each}
 	</tbody>
 </table>
-<lens-data-passer bind:this="{dataPasser}"></lens-data-passer>
+<lens-data-passer bind:this={dataPasser}></lens-data-passer>
 
 <style>
 	.table-cell,
@@ -176,11 +178,13 @@
 		width: 16px;
 		height: 16px;
 	}
+	/*
 	.collection-table > tr > td {
 		text-align: left;
 		padding-top: 0.5em;
 		padding-bottom: 0.5em;
 	}
+	*/
 	.collection-name {
 		width: 30%;
 	}
