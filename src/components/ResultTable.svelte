@@ -178,13 +178,6 @@
 		width: 16px;
 		height: 16px;
 	}
-	/*
-	.collection-table > tr > td {
-		text-align: left;
-		padding-top: 0.5em;
-		padding-bottom: 0.5em;
-	}
-	*/
 	.collection-name {
 		width: 30%;
 	}
