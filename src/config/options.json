@@ -184,12 +184,14 @@
                 "dataKey": "provider"
             },
             {
-                "title": "Studies",
+                "title": "Imaging Studies",
                 "dataKey": "studies_count"
             },
             {
                 "title": "Subjects",
-                "dataKey": "subject_count"
+                "dataKey": "subject_count",
+                "tooltip": "Not necessarily distinct subjects; subjects between different collections might not be de-duplicated."
+
             }
         ],
         "claimedText": "Processing..."
