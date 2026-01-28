@@ -24,10 +24,10 @@ export const requestBackend = (
 
 	let backendUrl: string = '';
 
-	if (import.meta.env.VITE_TARGET_ENVIRONMENT === "production") {
-	    backendUrl = "https://explorer.eucaim.cancerimage.eu/backend/";
-	} else if (import.meta.env.VITE_TARGET_ENVIRONMENT === "staging") {
-	  backendUrl = "https://explorer.eucaim.cancerimage.eu/backend/";
+	if (import.meta.env.VITE_TARGET_ENVIRONMENT === 'production') {
+		backendUrl = 'https://explorer.eucaim.cancerimage.eu/backend/';
+	} else if (import.meta.env.VITE_TARGET_ENVIRONMENT === 'staging') {
+		backendUrl = 'https://explorer.eucaim.cancerimage.eu/backend/';
 	} else {
 		backendUrl = 'http://localhost:8055';
 	}

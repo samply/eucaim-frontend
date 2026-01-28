@@ -1,5 +1,6 @@
 [
     {
+        "fieldType": "group",
         "key": "patient",
         "name": "Patient",
         "childCategories": [
@@ -91,6 +92,7 @@
         ]
     },
     {
+        "fieldType": "group",
         "key": "imaging",
         "name": "Image Parameters",
         "childCategories": [
@@ -279,6 +281,7 @@
                 "type": "BETWEEN"
             }
         ],
+        "fieldType": "group",
         "key": "tumor_marker_test",
         "name": "Tumor Marker Test"
     },
@@ -373,6 +376,7 @@
                 "type": "EQUALS"
             }
         ],
+        "fieldType": "group",
         "key": "histologic_grade",
         "name": "Histologic Grade"
     },
@@ -588,6 +592,7 @@
                 "type": "EQUALS"
             }
         ],
+        "fieldType": "group",
         "key": "cancer_stage",
         "name": "Cancer stage"
     },
@@ -672,6 +677,7 @@
                 "type": "EQUALS"
             }
         ],
+        "fieldType": "group",
         "key": "tumor",
         "name": "Tumor"
     }

@@ -3,7 +3,6 @@
 	import type { Provider } from '../Types/types';
 	export let options = {
 		headerData: [],
-		claimedText: ''
 	};
 
 	let response: Provider[] = [];
