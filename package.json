@@ -45,14 +45,13 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@samply/lens": "0.4.6-0",
+		"@samply/lens": "^0.5.0",
 		"@sveltejs/adapter-node": "^5.2.9",
 		"cookie": "^1.1.1",
 		"devalue": "^5.6.0"
 	},
-
 	"_comment": "This forces cookie to 0.7.0 to fix security issue (needed with svelteKit 2.49.2, probably not needed with v3)",
 	"overrides": {
-		"cookie":"^1.1.1" 
+		"cookie": "^1.1.1"
 	}
 }
