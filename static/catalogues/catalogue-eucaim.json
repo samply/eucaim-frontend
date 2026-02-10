@@ -7,7 +7,6 @@
             {
                 "key": "SNOMEDCT263495000",
                 "name": "Gender",
-                "system": "",
                 "fieldType": "single-select",
                 "type": "EQUALS",
                 "criteria": [
@@ -36,7 +35,6 @@
             {
                 "key": "SNOMEDCT423493009",
                 "name": "Age at Diagnosis",
-                "system": "",
                 "fieldType": "number",
                 "type": "BETWEEN",
                 "criteria": []
@@ -50,7 +48,6 @@
             {
                 "key": "SNOMEDCT439401001",
                 "name": "Diagnosis",
-                "system": "urn:snomed-org/sct",
                 "fieldType": "autocomplete",
                 "type": "EQUALS",
                 "criteria": [
@@ -84,7 +81,6 @@
             {
                 "key": "SNOMEDCT432213005",
                 "name": "Year of Diagnosis",
-                "system": "",
                 "fieldType": "number",
                 "type": "BETWEEN",
                 "criteria": []
@@ -99,7 +95,6 @@
             {
                 "key": "RID10311",
                 "name": "Modality",
-                "system": "urn:oid:2.16.840.1.113883.6.256",
                 "fieldType": "single-select",
                 "type": "EQUALS",
                 "criteria": [
@@ -128,7 +123,6 @@
             {
                 "key": "SNOMEDCT123037004",
                 "name": "Body Part",
-                "system": "urn:snomed-org/sct",
                 "fieldType": "autocomplete",
                 "type": "EQUALS",
                 "criteria": [
@@ -162,7 +156,6 @@
             {
                 "key": "C25392",
                 "name": "Manufacturer",
-                "system": "http://bioontology.org/projects/ontologies/birnlex",
                 "fieldType": "single-select",
                 "type": "EQUALS",
                 "criteria": [
@@ -213,7 +206,6 @@
                 "fieldType": "single-select",
                 "key": "EUCAIM_Hyper-Ontology_V1.0.CLIN1045815",
                 "name": "Estrogen receptor Ag [Presence] in Breast cancer specimen by Immune stain",
-                "system": "",
                 "type": "EQUALS"
             },
             {
@@ -232,7 +224,6 @@
                 "fieldType": "single-select",
                 "key": "EUCAIM_Hyper-Ontology_V1.0.CLIN1046085",
                 "name": "Progesterone receptor Ag [Presence] in Breast cancer specimen by Immune stain",
-                "system": "",
                 "type": "EQUALS"
             },
             {
@@ -240,7 +231,6 @@
                 "key": "EUCAIM_Hyper-Ontology_V1.0.CLIN1033410",
                 "min": 0,
                 "name": "Prostate specific Ag [Mass/Volume] in Serum or Plasma",
-                "system": "",
                 "type": "BETWEEN"
             },
             {
@@ -269,7 +259,6 @@
                 "fieldType": "single-select",
                 "key": "EUCAIM_Hyper-Ontology_V1.0.CLIN1045851",
                 "name": "HER2 [Presence] in Breast cancer specimen by Immune stain",
-                "system": "",
                 "type": "EQUALS"
             },
             {
@@ -277,7 +266,6 @@
                 "key": "EUCAIM_Hyper-Ontology_V1.0.CLIN1045913",
                 "min": 0,
                 "name": "Cells.Ki-67 nuclear Ag/100 cells in Breast cancer specimen by Immune stain",
-                "system": "",
                 "type": "BETWEEN"
             }
         ],
@@ -338,7 +326,6 @@
                 "fieldType": "single-select",
                 "key": "EUCAIM_Hyper-Ontology_V1.0.CLIN1037294",
                 "name": "Gleason scoring system for malignant neoplasm of prostate (staging scale)",
-                "system": "",
                 "type": "EQUALS"
             },
             {
@@ -372,7 +359,6 @@
                 "fieldType": "single-select",
                 "key": "EUCAIM_Hyper-Ontology_V1.0.CLIN1037300",
                 "name": "International Society of Urological Pathology prostate cancer staging system (staging scale)",
-                "system": "",
                 "type": "EQUALS"
             }
         ],
@@ -438,7 +424,6 @@
                 "fieldType": "single-select",
                 "key": "EUCAIM_Hyper-Ontology_V1.0.CLIN1033379",
                 "name": "cT category",
-                "system": "",
                 "type": "EQUALS"
             },
             {
@@ -497,7 +482,6 @@
                 "fieldType": "single-select",
                 "key": "EUCAIM_Hyper-Ontology_V1.0.CLIN1033391",
                 "name": "pT category",
-                "system": "",
                 "type": "EQUALS"
             },
             {
@@ -516,7 +500,6 @@
                 "fieldType": "single-select",
                 "key": "EUCAIM_Hyper-Ontology_V1.0.CLIN1033358",
                 "name": "cN category",
-                "system": "",
                 "type": "EQUALS"
             },
             {
@@ -535,7 +518,6 @@
                 "fieldType": "single-select",
                 "key": "EUCAIM_Hyper-Ontology_V1.0.CLIN1033368",
                 "name": "pN category",
-                "system": "",
                 "type": "EQUALS"
             },
             {
@@ -559,7 +541,6 @@
                 "fieldType": "single-select",
                 "key": "EUCAIM_Hyper-Ontology_V1.0.CLIN1033341",
                 "name": "cM category",
-                "system": "",
                 "type": "EQUALS"
             },
             {
@@ -588,7 +569,6 @@
                 "fieldType": "single-select",
                 "key": "EUCAIM_Hyper-Ontology_V1.0.CLIN1033349",
                 "name": "pM category",
-                "system": "",
                 "type": "EQUALS"
             }
         ],
@@ -639,7 +619,6 @@
                 "fieldType": "single-select",
                 "key": "EUCAIM_Hyper-Ontology_V1.0.IMG1005459",
                 "name": "BI-RADS assessment",
-                "system": "",
                 "type": "EQUALS"
             },
             {
@@ -673,7 +652,6 @@
                 "fieldType": "single-select",
                 "key": "EUCAIM_Hyper-Ontology_V1.0.IMG1005459",
                 "name": "PI-RADS assessment",
-                "system": "",
                 "type": "EQUALS"
             }
         ],
