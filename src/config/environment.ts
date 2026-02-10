@@ -1,6 +1,6 @@
 // VITE_TARGET_ENVIRONMENT should be set by the ci pipeline
 
-import type { MeasureGroup, MeasureItem } from '@samply/lens';
+import type { MeasureGroup, FhirMeasureItem } from '@samply/lens';
 
 import {
 	dktkDiagnosisMeasure,
@@ -26,12 +26,12 @@ export const measures: MeasureGroup[] = [
 	{
 		name: 'DKTK',
 		measures: [
-			dktkPatientsMeasure as MeasureItem,
-			dktkDiagnosisMeasure as MeasureItem,
-			dktkSpecimenMeasure as MeasureItem,
-			dktkProceduresMeasure as MeasureItem,
-			dktkMedicationStatementsMeasure as MeasureItem,
-			dktkHistologyMeasure as MeasureItem
+			dktkPatientsMeasure as FhirMeasureItem,
+			dktkDiagnosisMeasure as FhirMeasureItem,
+			dktkSpecimenMeasure as FhirMeasureItem,
+			dktkProceduresMeasure as FhirMeasureItem,
+			dktkMedicationStatementsMeasure as FhirMeasureItem,
+			dktkHistologyMeasure as FhirMeasureItem
 		]
 	}
 ];
