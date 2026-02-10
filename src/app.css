@@ -425,6 +425,13 @@ lens-info-button::part(info-button-icon) {
   width: 21px;
 }
 
+lens-info-button::part(info-button-icon):hover,
+lens-result-summary::part(info-button-icon):hover,
+lens-result-table::part(info-button-icon):hover,
+lens-chart::part(info-button-icon):hover,
+lens-catalogue::part(info-button-icon):hover {
+  transform: scale(1.1);
+}
 
 .result-table-hint-text {
   padding-top: 20px;
