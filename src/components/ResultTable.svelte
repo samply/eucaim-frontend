@@ -2,7 +2,7 @@
 	import type { LensDataPasser } from '@samply/lens';
 	import type { Provider } from '../Types/types';
 	export let options = {
-		headerData: [],
+		headerData: []
 	};
 
 	let response: Provider[] = [];
