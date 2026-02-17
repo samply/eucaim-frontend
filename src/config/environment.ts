@@ -11,14 +11,6 @@ import {
 	dktkHistologyMeasure
 } from '../measures';
 
-export const genderHeaders: Map<string, string> = new Map<string, string>()
-	.set('male', 'männlich')
-	.set('female', 'weiblich')
-	.set('other', 'Divers, Intersexuell')
-	.set('unknown', 'unbekannt');
-
-export const barChartBackgroundColors: string[] = ['#4dc9f6', '#3da4c7'];
-
 /**
  * Array of measure groups for different backends
  */
@@ -35,5 +27,3 @@ export const measures: MeasureGroup[] = [
 		]
 	}
 ];
-
-export const backendMeasures = `DKTK_STRAT_DEF_IN_INITIAL_POPULATION`;
