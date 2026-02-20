@@ -2,8 +2,8 @@ FROM node:lts as build
 ARG TARGET_ENVIRONMENT="staging"
 WORKDIR /usr/src/app
 RUN sh -c '[ -z "$http_proxy" ] || ( npm config set proxy $http_proxy; npm config set https-proxy $http_proxy )'
-COPY package.json ./
-RUN npm install
+COPY package*.json ./
+RUN npm ci
 COPY ./vite.config.ts ./svelte.config.js ./
 COPY ./src ./src
 COPY ./static ./static
@@ -15,7 +15,8 @@ FROM node:lts AS deploy
 WORKDIR /app
 
 COPY --from=build /usr/src/app/build build/
-COPY --from=build /usr/src/app/package.json .
+COPY --from=build /usr/src/app/package*.json .
+COPY --from=build /usr/src/app/node_modules ./node_modules
 
 EXPOSE 3000
 

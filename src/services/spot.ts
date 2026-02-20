@@ -8,8 +8,8 @@ import type { Provider } from '../Types/types';
 export class Spot {
 	constructor(
 		private url: URL,
-		private sites: Array<string>,
-		private currentTask: string
+		private currentTask: string,
+		private sites?: Array<string>
 	) {}
 
 	/**
@@ -24,22 +24,42 @@ export class Spot {
 		controller: AbortController
 	): Promise<void> {
 		try {
-			const beamTaskResponse = await fetch(
-				`${this.url}beam?sites=${this.sites.toString()}`,
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					credentials: 'include',
-					body: JSON.stringify({
-						id: this.currentTask,
-						sites: this.sites,
-						query: query
-					}),
-					signal: controller.signal
-				}
-			);
+			let beamTaskResponse: Response;
+			if (this.sites !== undefined) {
+				beamTaskResponse = await fetch(
+					`${this.url}beam?sites=${this.sites.toString()}`,
+					{
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						credentials: 'include',
+						body: JSON.stringify({
+							id: this.currentTask,
+							sites: this.sites,
+							query: query
+						}),
+						signal: controller.signal
+					}
+				);
+			} else {
+				beamTaskResponse = await fetch(
+					`${this.url}beam`,
+					{
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						credentials: 'include',
+						body: JSON.stringify({
+							id: this.currentTask,
+							query: query
+						}),
+						signal: controller.signal
+					}
+				);
+
+			}
 			if (!beamTaskResponse.ok) {
 				const error = await beamTaskResponse.text();
 				console.debug(`Received ${beamTaskResponse.status} with message ${error}`);
@@ -48,8 +68,9 @@ export class Spot {
 
 			console.info(`Created new Beam Task with id ${this.currentTask}`);
 
+			const eventUrl = this.sites !== undefined ? `${this.url.toString()}beam/${this.currentTask}?wait_count=${this.sites.length}` :`${this.url.toString()}beam/${this.currentTask}`;
 			const eventSource = new EventSource(
-				`${this.url.toString()}beam/${this.currentTask}?wait_count=${this.sites.length}`,
+				eventUrl,
 				{
 					withCredentials: true
 				}

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import './app.css';
 	import { browser } from '$app/environment';
+	//used for tooltip
+	import { onMount } from 'svelte';
 
 	// conditional import for SSR
 	if (browser) import('@samply/lens');
@@ -87,6 +89,25 @@
 		const { ast, updateResponse, abortController } = event.detail;
 		requestBackend(ast, updateResponse, abortController);
 	});
+
+	// Add tooltips to table headers after component mounts
+	onMount(() => {
+		const headers = document.querySelectorAll('.table-header-cell');
+		headers.forEach((header, index) => {
+			const headerData = options.tableOptions.headerData[index];
+			if (headerData && headerData.tooltip) {
+				// Create tooltip icon
+				const tooltipIcon = document.createElement('img');
+				tooltipIcon.src = options.iconOptions.infoUrl;
+				tooltipIcon.className = 'header-tooltip-icon';
+				tooltipIcon.title = headerData.tooltip;
+				tooltipIcon.alt = 'info';
+
+				// Append icon to header
+				header.appendChild(tooltipIcon);
+			}
+		});
+	});
 </script>
 
 <header>
@@ -95,7 +116,11 @@
 			<img src="../assets/images/logoEUCAIM_nav@1.5x-8.png" alt="" />
 		</a>
 	</div>
-	<button class="burger-menu-button" on:click="{toggleMobileNav}">
+	<button
+		class="burger-menu-button"
+		on:click={toggleMobileNav}
+		aria-label="Toggle navigation menu"
+	>
 		<div></div>
 		<div></div>
 		<div></div>
@@ -122,11 +147,11 @@
 <main>
 	<div class="search">
 		<div class="search-wrapper">
-			<lens-search-bar-multiple noMatchesFoundMessage="{'No collections found'}"
+			<lens-search-bar-multiple noMatchesFoundMessage={'No collections found'}
 			></lens-search-bar-multiple>
 			<lens-info-button
 				noQueryMessage="Query with no criteria selected: Searches for all collections."
-				showQuery="{true}"
+				showQuery={true}
 			></lens-info-button>
 			<lens-search-button title="Search"></lens-search-button>
 		</div>
@@ -138,8 +163,8 @@
 					toggleIconUrl="right-arrow-svgrepo-com.svg"
 					addIconUrl="long-right-arrow-svgrepo-com.svg"
 					infoIconUrl="info-circle-svgrepo-com.svg"
-					texts="{catalogueText}"
-					toggle="{{ collapsable: catalogueCollapsable, open: catalogueopen }}"
+					texts={catalogueText}
+					toggle={{ collapsable: catalogueCollapsable, open: catalogueopen }}
 				></lens-catalogue>
 			</div>
 		</div>
@@ -153,12 +178,12 @@
 					title="Studies per Collection"
 					catalogueGroupCode="Studies"
 					chartType="pie"
-					displayLegends="{true}"
+					displayLegends={true}
 				></lens-chart>
 			</div>
 
 			<div class="chart-wrapper result-table">
-				<ResultTable options="{options.tableOptions}" />
+				<ResultTable options={options.tableOptions} />
 			</div>
 		</div>
 	</div>
@@ -198,4 +223,18 @@
 	System error: {someError.message}
 {/await}
 
-<lens-data-passer bind:this="{dataPasser}"></lens-data-passer>
+<lens-data-passer bind:this={dataPasser}></lens-data-passer>
+
+<style>
+	:global(.header-tooltip-icon) {
+		width: 14px;
+		height: 14px;
+		margin-left: 6px;
+		vertical-align: middle;
+		opacity: 0.7;
+	}
+
+	:global(.header-tooltip-icon:hover) {
+		opacity: 1;
+	}
+</style>
