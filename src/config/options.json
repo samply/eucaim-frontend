@@ -1,4 +1,6 @@
 {
+    "spotUrl": "https://explorer.eucaim.cancerimage.eu/backend/",
+    "sitesToQuery": ["procanceri", "chaimeleon", "incisive", "upv-node", "huvr", "auth"],
     "siteMappings": {
         "berlin-test": "Berlin",
         "bonn": "Bonn",
@@ -192,12 +194,16 @@
         "title": "Results",
         "dataTypes": [
             {
-                "title": "Collections",
+                "title": "Provider",
                 "dataKey": "collections"
             },
             {
-                "title": "Patienten",
-                "dataKey": "patients"
+                "title": "Studies",
+                "dataKey": "studies"
+            },
+            {
+                "title": "Subjects",
+                "dataKey": "subjects"
             }
         ]
     }

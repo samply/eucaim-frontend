@@ -1,4 +1,6 @@
 {
+    "spotUrl": "http://localhost:8055",
+    "sitesToQuery": ["proxy1", "proxy2"],
     "siteMappings": {
         "berlin-test": "Berlin",
         "bonn": "Bonn",
@@ -16,12 +18,6 @@
         "dktk-test": "DKTK-Test",
         "hamburg": "Hamburg"
     },
-    "catalogueKeyToResponseKeyMap": [
-        [
-            "Studies",
-            "Studies"
-        ]
-    ],
     "chartOptions": {
         "patients": {
             "legendMapping": {
@@ -183,15 +179,16 @@
                 "dataKey": "provider"
             },
             {
-                "title": "Studies",
+                "title": "Imaging Studies",
                 "dataKey": "studies_count"
             },
             {
                 "title": "Subjects",
-                "dataKey": "subject_count"
+                "dataKey": "subject_count",
+                "tooltip": "Not necessarily distinct subjects; subjects between different collections might not be de-duplicated.",
+                "comment": "ignore tooltip not allowed. This is nessesary for the tooltip feature, but not compatible with the schema."
             }
-        ],
-        "claimedText": "Processing..."
+        ]
     },
     "resultSummaryOptions": {
         "title": "Results",
@@ -202,14 +199,12 @@
             },
             {
                 "title": "Studies",
-                "dataKey": "Studies"
+                "dataKey": "studies"
             },
             {
                 "title": "Subjects",
-                "dataKey": "Subjects"
+                "dataKey": "subjects"
             }
         ]
-    },
-    "backends": {
     }
 }

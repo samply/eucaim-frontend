@@ -1,64 +1,25 @@
 <script lang="ts">
 	import './app.css';
+	import {
+		setOptions,
+		setCatalogue,
+		type LensOptions,
+		type Catalogue
+	} from '@samply/lens';
 	import { browser } from '$app/environment';
-	//used for tooltip
 	import { onMount } from 'svelte';
 
 	// conditional import for SSR
 	if (browser) import('@samply/lens');
 
-	import { measures } from './config/environment';
-	import options from './config/options.json';
-	import type { LensDataPasser, QueryEvent } from '@samply/lens';
+	import { options } from './config/options';
 	import { catalogueText, fetchData } from './services/catalogue.service';
-	import ResultTable from './components/ResultTable.svelte';
-	import { requestBackend } from './services/backend.service';
+	import EucaimResultTable from './components/EucaimResultTable.svelte';
+	import { callBackend } from './services/backend.service';
 
 	let catalogueopen = false;
 	let catalogueCollapsable = true;
 
-	const catalogueUrl = 'catalogues/catalogue-eucaim.json';
-	const optionsFilePath = 'config/options.json';
-
-	const jsonPromises: Promise<{
-		catalogueJSON: string;
-		optionsJSON: string;
-	}> = fetchData(catalogueUrl, optionsFilePath);
-
-	//let catalogueDataPromise = getStaticCatalogue('catalogues/catalogue-eucaim.json');
-
-	let dataPasser: LensDataPasser;
-
-	/**
-	 * The following functions are the API to the library stores (state)
-	 * here you get information to use in your application
-	 * or manipulate the stores
-	 * use if needed and import types from @samply/lens
-	 */
-
-	// const getQuery = (): void => {
-	// 	console.log('getQuery()', dataPasser.getQueryAPI());
-	// };
-
-	// const getResponse = (): void => {
-	// 	console.log('getResponse()', dataPasser.getResponseAPI());
-	// };
-
-	// const getAST = (): void => {
-	// 	console.log('getAst()', dataPasser.getAstAPI());
-	// };
-
-	// const removeItem = (queryObject: QueryItem): void => {
-	// 	console.log('removeItem()', queryObject);
-	// 	dataPasser.removeItemFromQuyeryAPI({ queryObject });
-	// 	getQuery();
-	// };
-
-	// const removeValue = (queryItem: QueryItem, value: QueryValue): void => {
-	// 	console.log('removeValue()', queryItem, value);
-	// 	dataPasser.removeValueFromQueryAPI({ queryItem, value });
-	// 	getQuery();
-	// };
 	let mobileNavOpen = false;
 	const toggleMobileNav = () => {
 		mobileNavOpen = !mobileNavOpen;
@@ -80,27 +41,28 @@
 		catalogueCollapsable = false;
 	}
 
-	/**
-	 * This event listener is triggered when the user clicks the search button
-	 */
-
-	window.addEventListener('emit-lens-query', (e) => {
-		const event = e as QueryEvent;
-		const { ast, updateResponse, abortController } = event.detail;
-		requestBackend(ast, updateResponse, abortController);
+	window.addEventListener('lens-search-triggered', () => {
+		callBackend();
 	});
 
-	// Add tooltips to table headers after component mounts
 	onMount(() => {
+		setOptions(options as LensOptions);
+		let catalogueDataPromise = fetchData('/catalogues/catalogue-eucaim.json');
+
+		catalogueDataPromise.then((catalogue: Catalogue) => {
+			setCatalogue(catalogue);
+		});
+
+		// Add tooltips to table headers after component mounts
 		const headers = document.querySelectorAll('.table-header-cell');
 		headers.forEach((header, index) => {
-			const headerData = options.tableOptions.headerData[index];
-			if (headerData && headerData.tooltip) {
+			const headerData = options?.tableOptions?.headerData?.[index];
+			if (headerData && 'tooltip' in headerData && headerData.tooltip) {
 				// Create tooltip icon
 				const tooltipIcon = document.createElement('img');
-				tooltipIcon.src = options.iconOptions.infoUrl;
+				tooltipIcon.src = 'info-circle-svgrepo-com.svg';
 				tooltipIcon.className = 'header-tooltip-icon';
-				tooltipIcon.title = headerData.tooltip;
+				tooltipIcon.title = String(headerData.tooltip);
 				tooltipIcon.alt = 'info';
 
 				// Append icon to header
@@ -178,11 +140,12 @@
 					catalogueGroupCode="Studies"
 					chartType="pie"
 					displayLegends={true}
+					datakey="studies"
 				></lens-chart>
 			</div>
 
 			<div class="chart-wrapper result-table">
-				<ResultTable options={options.tableOptions} />
+				<EucaimResultTable />
 			</div>
 		</div>
 	</div>
@@ -213,16 +176,7 @@
 	</div>
 </footer>
 
-<!-- here it waits on all promises to resolve and fills in the parameters -->
-{#await jsonPromises}
-	Loading data...
-{:then { optionsJSON, catalogueJSON }}
-	<lens-options {catalogueJSON} {optionsJSON} {measures}></lens-options>
-{:catch someError}
-	System error: {someError.message}
-{/await}
-
-<lens-data-passer bind:this={dataPasser}></lens-data-passer>
+<lens-data-passer></lens-data-passer>
 
 <style>
 	:global(.header-tooltip-icon) {
