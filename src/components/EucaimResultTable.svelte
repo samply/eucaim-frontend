@@ -1,51 +1,30 @@
 <script lang="ts">
-	import type { LensDataPasser } from '@samply/lens';
 	import type { Provider } from '../Types/types';
-	export let options = {
-		headerData: []
-	};
+	import { options } from '../config/options';
+	import type { HeaderData } from '@samply/lens';
+	import { resultsStore } from '../services/backend.service';
 
-	let response: Provider[] = [];
-	let expanded: boolean[] = new Array(1).fill(false);
-	let dataPasser: LensDataPasser;
+	let response: Provider[] = $state([]);
+	let expanded = $state<Record<string, boolean>>({});
+
 	let catalogueLink: string =
 		'https://catalogue.eucaim.cancerimage.eu/Eucaim/eucaim-ui/#/dataset/';
-
+	let headerData: HeaderData[] = $derived(options?.tableOptions?.headerData || []);
+	resultsStore.subscribe((value) => {
+		response = value;
+	});
 	const toggleExpand = (index: string) => {
-		expanded[index] = !expanded[index];
+		expanded = { ...expanded, [index]: !expanded[index] };
 		const img: HTMLElement | null = document.getElementById(`expand-button-img-${index}`);
 		if (!img) return;
 		img.classList.toggle('expand-button-img-rotate');
 	};
-
-	window.addEventListener('lens-responses-updated', () => {
-		response = Array.from(
-			dataPasser?.getResponseAPI().values(),
-			(x) => x.data.extension[0] as Provider
-		);
-	});
-
-	/**
-	 * watches the responseStore for changes to update the table
-	 */
-
-	/*
-	const blacklist = ['id', 'studies_count', 'subjects_count'];
-	providers.forEach((provider) => {
-		provider.collections.forEach((collection) => {
-			var resultArray = Object.keys(collection).map(function (index) {
-				console.log(index)
-				console.log(collection[index])
-				if (!blacklist.includes(index)) return "";
-			});
-		})
-	})*/
 </script>
 
 <table cellspacing="0" class="result-table">
 	<thead class="table-header">
 		<tr class="table-header-row">
-			{#each options.headerData as header}
+			{#each headerData as header}
 				<th class="table-header-cell table-header-datatype">
 					{header.title}
 				</th>
@@ -78,7 +57,7 @@
 					<td class="table-cell" style="width:4%">
 						<button
 							class="expand-button"
-							on:click={() => toggleExpand(index1.toString() + index2.toString())}
+							onclick={() => toggleExpand(index1.toString() + index2.toString())}
 							><img
 								class="expand-button-img expand-button-img-rotate"
 								id="expand-button-img-{index1.toString() + index2.toString()}"
@@ -137,7 +116,6 @@
 		{/each}
 	</tbody>
 </table>
-<lens-data-passer bind:this={dataPasser}></lens-data-passer>
 
 <style>
 	.table-cell,

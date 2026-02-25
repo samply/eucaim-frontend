@@ -42,6 +42,7 @@
         ]
     },
     {
+        "fieldType": "group",
         "key": "clinical",
         "name": "Clinical Parameters",
         "childCategories": [
