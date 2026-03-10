@@ -1,12 +1,5 @@
 {
     "spotUrl": "https://explorer.eucaim.cancerimage.eu/backend/",
-    "sitesToQuery": ["procanceri", "chaimeleon", "incisive", "upv-node", "huvr", "auth"],
-    "iconOptions": {
-        "deleteUrl": "delete_icon.svg",
-        "infoUrl": "info-circle-svgrepo-com.svg",
-        "toggleIconUrl": "right-arrow-svgrepo-com.svg",
-        "addIconUrl": "long-right-arrow-svgrepo-com.svg"
-    },
     "tableOptions": {
         "headerData": [
             {

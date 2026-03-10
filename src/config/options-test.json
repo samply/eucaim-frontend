@@ -1,13 +1,5 @@
 {
-    "spotUrl": "http://localhost:8055",
-    "sitesToQuery": ["proxy1", "proxy2"],
-    "iconOptions": {
-        "deleteUrl": "delete_icon.svg",
-        "infoUrl": "info-circle-svgrepo-com.svg",
-        "selectAll": {
-            "text": "Add all"
-        }
-    },
+    "spotUrl": "http://localhost:8055", 
     "catalogueKeyToResponseKeyMap": [
         [
             "Studies",
