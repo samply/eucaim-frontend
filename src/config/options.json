@@ -1,6 +1,5 @@
 {
     "spotUrl": "https://explorer.eucaim.cancerimage.eu/backend/",
-    "sitesToQuery": ["procanceri", "chaimeleon", "incisive", "upv-node", "huvr", "auth"],
     "siteMappings": {
         "berlin-test": "Berlin",
         "bonn": "Bonn",

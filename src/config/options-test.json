@@ -1,6 +1,5 @@
 {
     "spotUrl": "http://localhost:8055",
-    "sitesToQuery": ["proxy1", "proxy2"],
     "siteMappings": {
         "berlin-test": "Berlin",
         "bonn": "Bonn",
