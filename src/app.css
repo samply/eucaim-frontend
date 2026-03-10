@@ -50,10 +50,6 @@
   --font-family: 'Open Sans', sans-serif;
 }
 
-/**
-* Demo
-*/
-
 * {
   box-sizing: border-box;
 }
@@ -413,19 +409,6 @@ lens-search-button::part(lens-search-button) {
   padding-bottom: 0;
 }
 
-lens-info-button::part(info-button) {
-  height: 100%;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-lens-info-button::part(info-button-icon) {
-  width: 21px;
-}
-
-lens-info-button::part(info-button-icon):hover,
 lens-result-summary::part(info-button-icon):hover,
 lens-result-table::part(info-button-icon):hover,
 lens-chart::part(info-button-icon):hover,
