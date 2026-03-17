@@ -155,14 +155,14 @@ main>div {
 
 lens-search-bar-multiple {
   grid-column: 1/-1;
- }
+}
 
- lens-info-button {
+lens-query-explain-button {
   grid-column: 2/3;
   height: 40px;
   align-self: end;
 }
-lens-search-button {
+lens-query-explain-button {
   grid-column: 3/4;
   height: 40px;
   align-self: end;
@@ -176,7 +176,7 @@ lens-search-button {
     grid-column: 1/2;
    }
   
-   lens-info-button {
+ lens-query-explain-button {
     grid-column: 2/3;
    }
    lens-search-button {
@@ -309,8 +309,8 @@ lens-search-bar-multiple::part(lens-searchbar-or-indicator) {
   color: var(--white);
 }
 
-lens-search-bar-multiple::part(info-button),
-lens-search-bar::part(info-button) {
+lens-search-bar-multiple::part(query-explain-button),
+lens-search-bar::part(query-explain-button) {
   background-color: var(--light-blue);
   border-color: var(--light-blue);
   position: relative;
@@ -319,8 +319,8 @@ lens-search-bar::part(info-button) {
   top: +2px;
 }
 
-lens-search-bar::part(info-button-icon),
-lens-search-bar-multiple::part(info-button-icon) {
+lens-search-bar::part(query-explain-button-icon),
+lens-search-bar-multiple::part(query-explain-button-icon) {
   height: calc(var(--font-size-s) + 8px);
   width: calc(var(--font-size-s) + 8px);
   filter: brightness(0) invert(1);
@@ -328,15 +328,15 @@ lens-search-bar-multiple::part(info-button-icon) {
   border-radius: 50%;
 }
 
-lens-search-bar::part(info-button-icon):hover,
-lens-search-bar-multiple::part(info-button-icon):hover {
+lens-search-bar::part(query-explain-button-icon):hover,
+lens-search-bar-multiple::part(query-explain-button-icon):hover {
   filter: invert(38%) sepia(78%) saturate(1321%) hue-rotate(352deg) brightness(92%) contrast(99%);
   transform: scale(1.1);
   cursor: pointer;
 }
 
-lens-search-bar::part(info-button-dialogue),
-lens-search-bar-multiple::part(info-button-dialogue) {
+lens-search-bar::part(query-explain-button-dialogue),
+lens-search-bar-multiple::part(query-explain-button-dialogue) {
   position: absolute;
   border: none;
   background-color: var(--white);
@@ -399,9 +399,6 @@ lens-search-button::part(lens-search-button):active {
   background-color: #003d7e;
 }
 
-/**
-  Catalogue
-*/
 
 lens-search-button::part(lens-search-button) {
   height: 100%;
@@ -409,10 +406,10 @@ lens-search-button::part(lens-search-button) {
   padding-bottom: 0;
 }
 
-lens-result-summary::part(info-button-icon):hover,
-lens-result-table::part(info-button-icon):hover,
-lens-chart::part(info-button-icon):hover,
-lens-catalogue::part(info-button-icon):hover {
+lens-result-summary::part(query-explain-button-icon):hover,
+lens-result-table::part(query-explain-button-icon):hover,
+lens-chart::part(query-explain-button-icon):hover,
+lens-catalogue::part(query-explain-button-icon):hover {
   transform: scale(1.1);
 }
 
@@ -420,4 +417,8 @@ lens-catalogue::part(info-button-icon):hover {
   padding-top: 20px;
   display: flex;
   align-items: end;
+}
+
+lens-chart::part(lens-chart-wrapper) {
+  display: revert !important;
 }

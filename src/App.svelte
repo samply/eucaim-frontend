@@ -47,7 +47,9 @@
 
 	onMount(() => {
 		setOptions(options as LensOptions);
-		let catalogueDataPromise = fetchData('/catalogues/catalogue-eucaim.json');
+		let catalogueDataPromise = fetchData(
+			'/catalogues/catalogue-eucaim.json'
+		) as Promise<Catalogue>;
 
 		catalogueDataPromise.then((catalogue: Catalogue) => {
 			setCatalogue(catalogue);
