@@ -1,5 +1,9 @@
+/* 
+  IMPORTS & FONTS
+*/
+
 /*comment in for npm package usage*/
-@import "../node_modules/@samply/lens/dist/style.css";
+@import "@samply/lens/style.css";
 
 @font-face {
   font-family: 'Open Sans';
@@ -7,7 +11,12 @@
   src: url('/fonts/Open_Sans/OpenSans-VariableFont_wdth\,wght.ttf') format('truetype');
 }
 
+
+/* 
+  CSS VARIABLES
+*/
 :root {
+  /* Colors */
   --white: #ffffff;
   --ghost-white: #f8f8ff;
   --black: #000000;
@@ -28,8 +37,10 @@
   --orange: #e95713;
   --light-orange: #ffa750;
 
+  /* Border Radius */
   --border-radius-small: 5px;
 
+  /* Spacing */
   --gap-xxs: 5px;
   --gap-xs: 10px;
   --gap-s: 20px;
@@ -38,6 +49,7 @@
   --gap-xl: 50px;
   --gap-xxl: 60px;
 
+  /* Typography */
   --font-size-xxs: 10px;
   --font-size-xs: 12px;
   --font-size-s: 14px;
@@ -45,18 +57,16 @@
   --font-size-l: 18px;
   --font-size-xl: 24px;
   --font-size-xxl: 32px;
-
   --font-family: 'Open Sans', sans-serif;
 }
 
-/**
-* Demo
+/*
+  BASE STYLES
 */
 
 * {
   box-sizing: border-box;
 }
-
 
 html,
 body {
@@ -73,6 +83,10 @@ button {
   font-family: inherit;
 }
 
+/*
+  HEADER & NAVIGATION
+*/
+
 header {
   background-color: var(--blue);
   padding: var(--gap-xs);
@@ -86,6 +100,29 @@ header {
     grid-template-columns: auto 1fr;
   }
 }
+
+nav {
+  color: var(--white);
+}
+
+header nav ul {
+  color: var(--white);
+  list-style-type: none;
+  padding: 0;
+}
+
+@media screen and (min-width: 769px) {
+  header nav ul {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+  }
+}
+
+
+/*
+  BURGER MENU
+*/
 
 .burger-menu-button {
   display: grid;
@@ -105,7 +142,6 @@ header {
   .burger-menu-button {
     display: none;
   }
-
 }
 
 .burger-menu-button div {
@@ -115,28 +151,10 @@ header {
   border-radius: 2px;
 }
 
-
-
-header nav ul {
-  color: var(--white);
-  list-style-type: none;
-  padding: 0;
-}
-
-@media screen and (min-width: 769px) {
-  header nav ul {
-    display: flex;
-    justify-content: right;
-    align-items: center;
-  }
-}
 /*
-a {
-  margin: 0 var(--gap-s);
-  color: var(--white);
-  text-decoration: none;
-}
+  SEARCH
 */
+
 main>div {
   margin: var(--gap-xs);
 }
@@ -149,7 +167,6 @@ main>div {
   margin: var(--gap-m);
 }
 
-
 .search-wrapper {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto auto;
@@ -158,35 +175,42 @@ main>div {
 
 lens-search-bar-multiple {
   grid-column: 1/-1;
- }
+  height: 40px;
+}
 
- lens-info-button {
+lens-query-explain-button {
   grid-column: 2/3;
   height: 40px;
   align-self: end;
 }
+
 lens-search-button {
   grid-column: 3/4;
   height: 40px;
   align-self: end;
- }
+}
 
 @media screen and (min-width: 769px) {
   .search-wrapper {
     grid-template-columns: minmax(0, 1fr) auto auto;
   }
+
   lens-search-bar-multiple {
     grid-column: 1/2;
-   }
-  
-   lens-info-button {
+  }
+
+  lens-query-explain-button {
     grid-column: 2/3;
-   }
-   lens-search-button {
+  }
+
+  lens-search-button {
     grid-column: 3/4;
-   }
-  
+  }
 }
+
+/* 
+  LAYOUT & GRID
+*/
 
 .grid {
   position: relative;
@@ -201,6 +225,11 @@ lens-search-button {
   }
 }
 
+
+/*
+  CATALOGUE
+*/
+
 .catalogue-wrapper {
   background-color: var(--white);
 }
@@ -212,7 +241,6 @@ lens-search-button {
 }
 
 @media screen and (min-width: 1024px) {
-
   .catalogue {
     grid-row: 1/-1;
     overflow-y: scroll;
@@ -220,8 +248,6 @@ lens-search-button {
     position: sticky;
     top: var(--gap-s);
   }
-  
-
 }
 
 .catalogue h2 {
@@ -232,6 +258,9 @@ lens-search-button {
   color: var(--dark-gray);
 }
 
+/*
+  CHARTS
+*/
 
 .charts {
   display: grid;
@@ -245,7 +274,6 @@ lens-search-button {
   }
 }
 
-
 .chart-wrapper {
   padding: var(--gap-s);
   background-color: var(--white);
@@ -253,7 +281,6 @@ lens-search-button {
 }
 
 @media screen and (min-width: 1024px) {
-
   .result-summary {
     grid-column: 1/-1;
   }
@@ -262,8 +289,17 @@ lens-search-button {
     grid-column: span 2;
     grid-template-rows: min-content;
   }
-
 }
+
+.result-table-hint-text {
+  padding-top: 20px;
+  display: flex;
+  align-items: end;
+}
+
+/*
+  FOOTER
+*/
 
 .credits {
   margin: var(--gap-m);
@@ -286,7 +322,6 @@ footer .logo img {
   width: 216px;
   aspect-ratio: auto 216 / 66;
   height: 66px;
-
 }
 
 footer .links {
@@ -296,24 +331,21 @@ footer .links {
   justify-content: center;
 }
 
+/*
+  OVERRIDES
+ */
 
-/**
-* Overrides
-*/
-
-/**
-  Searchbars
-*/
-
+/* Searchbars */
 lens-search-bar-multiple::part(lens-searchbar-chip) {
   background-color: var(--light-blue);
 }
+
 lens-search-bar-multiple::part(lens-searchbar-or-indicator) {
   color: var(--white);
 }
 
-lens-search-bar-multiple::part(info-button),
-lens-search-bar::part(info-button) {
+lens-search-bar-multiple::part(query-explain-button),
+lens-search-bar::part(query-explain-button) {
   background-color: var(--light-blue);
   border-color: var(--light-blue);
   position: relative;
@@ -322,8 +354,8 @@ lens-search-bar::part(info-button) {
   top: +2px;
 }
 
-lens-search-bar::part(info-button-icon),
-lens-search-bar-multiple::part(info-button-icon) {
+lens-search-bar::part(query-explain-button-icon),
+lens-search-bar-multiple::part(query-explain-button-icon) {
   height: calc(var(--font-size-s) + 8px);
   width: calc(var(--font-size-s) + 8px);
   filter: brightness(0) invert(1);
@@ -331,15 +363,15 @@ lens-search-bar-multiple::part(info-button-icon) {
   border-radius: 50%;
 }
 
-lens-search-bar::part(info-button-icon):hover,
-lens-search-bar-multiple::part(info-button-icon):hover {
+lens-search-bar::part(query-explain-button-icon):hover,
+lens-search-bar-multiple::part(query-explain-button-icon):hover {
   filter: invert(38%) sepia(78%) saturate(1321%) hue-rotate(352deg) brightness(92%) contrast(99%);
   transform: scale(1.1);
   cursor: pointer;
 }
 
-lens-search-bar::part(info-button-dialogue),
-lens-search-bar-multiple::part(info-button-dialogue) {
+lens-search-bar::part(query-explain-button-dialogue),
+lens-search-bar-multiple::part(query-explain-button-dialogue) {
   position: absolute;
   border: none;
   background-color: var(--white);
@@ -354,7 +386,7 @@ lens-search-bar-multiple::part(info-button-dialogue) {
   text-align: left;
 }
 
-lens-search-bar::part(query-delete-button-value), 
+lens-search-bar::part(query-delete-button-value),
 lens-search-bar-multiple::part(query-delete-button-value) {
   font-size: var(--font-size-xxs);
   color: var(--white);
@@ -389,149 +421,31 @@ lens-search-bar-multiple::part(delete-button-icon-value):hover {
   filter: invert(38%) sepia(78%) saturate(1321%) hue-rotate(352deg) brightness(92%) contrast(99%);
 }
 
-
+/* Search Button */
 lens-search-button::part(lens-search-button) {
   background-color: var(--light-blue);
+  height: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 lens-search-button::part(lens-search-button):hover {
-  background-color: #006adb
+  background-color: #006adb;
 }
 
 lens-search-button::part(lens-search-button):active {
   background-color: #003d7e;
 }
 
-/**
-  Catalogue
-*/
-
-lens-catalogue::part(lens-catalogue) {
-  padding-left: 8px;
-}
-
-lens-catalogue::part(lens-catalogue-toggle-button) {
-  width: 240px;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-lens-catalogue::part(toggle-button-icon) {
-  display: none;
-}
-
-lens-catalogue::part(toggle-button-text) {
-  width: 100%;
-}
-
-
-lens-catalogue::part(autocomplete-formfield-input) {
-  border: solid 1px var(--dark-gray);
-  border-radius: 0;
-}
-
-lens-catalogue::part(autocomplete-formfield-input):focus {
-  border-color: var(--light-blue);
-}
-
-lens-catalogue::part(query-add-button) {
-  background-color: var(--light-blue);
-}
-
-lens-catalogue::part(add-all-options-button) {
-  background-color: var(--light-blue);
-}
-
-lens-catalogue::part(number-input-formfield):focus {
-  border-color: var(--light-blue);
-  outline: none;
-}
-
-lens-catalogue::part(number-input-formfield) {
-  width: 60px;
-  margin-left: var(--gap-xs);
-  border: solid 1px var(--dark-gray);
-  border-radius: 0;
-  text-align: center;
-  font-size: var(--font-size-s);
-  -webkit-appearance: textfield;
-  -moz-appearance: textfield;
-  appearance: textfield !important;
-
-}
-
-lens-catalogue::part(number-input-formfield):focus {
-  border-color: var(--light-blue);
-  outline: none;
-}
-
-lens-catalogue::part(number-input-formfield)::-webkit-outer-spin-button,
-lens-catalogue::part(number-input-formfield)::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-lens-catalogue::part(data-tree-element-toggle-icon) {
-  width: 24px;
-  transform: rotate(0deg);
-  left: -15px;
-  top: 0px;
-  filter: invert(29%) sepia(17%) saturate(327%) hue-rotate(163deg) brightness(92%) contrast(85%);
-}
-
-lens-catalogue::part(data-tree-element-toggle-icon-open) {
-  transform: rotate(90deg);
-}
-
-lens-catalogue::part(query-add-button-icon) {
-  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(213deg) brightness(100%) contrast(100%);
-  width: 21px;
-}
-
-lens-search-button::part(lens-search-button) {
-  height: 100%;
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
-lens-info-button::part(info-button) {
-  height: 100%;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-lens-info-button::part(info-button-icon) {
-  width: 21px;
-}
-
-lens-info-button::part(info-button-icon):hover,
-lens-result-summary::part(info-button-icon):hover,
-lens-result-table::part(info-button-icon):hover,
-lens-chart::part(info-button-icon):hover,
-lens-catalogue::part(info-button-icon):hover {
+/* Query Explain Button Hover Effects */
+lens-result-summary::part(query-explain-button-icon):hover,
+lens-result-table::part(query-explain-button-icon):hover,
+lens-chart::part(query-explain-button-icon):hover,
+lens-catalogue::part(query-explain-button-icon):hover {
   transform: scale(1.1);
 }
 
-
-.catalogue lens-info-button::part(info-button) {
-  height: 38px;
-  padding: 0;
-  top: var(--gap-xs);
-  right: var(--gap-xs);
-  border: none;
-  position: absolute;
-}
-
-.catalogue lens-info-button::part(info-button-dialogue) {
-  max-width: 300px;
-  text-align: left;
-}
-
-.result-table-hint-text {
-  padding-top: 20px;
-  display: flex;
-  align-items: end;
+/* Chart Display */
+lens-chart::part(lens-chart-wrapper) {
+  display: revert !important;
 }
