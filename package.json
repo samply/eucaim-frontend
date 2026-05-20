@@ -4,6 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
+		"dev:headlights": "bash -c 'VITE_TARGET_ENVIRONMENT=staging vite dev'",
 		"build": "vite build",
 		"release": "vite dev --host",
 		"preview": "vite preview",
