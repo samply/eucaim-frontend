@@ -11,6 +11,7 @@ import { writable, type Writable } from 'svelte/store';
 import type { Provider } from '../Types/types';
 
 export const resultsStore: Writable<Provider[]> = writable([]);
+export const backendErrorStore: Writable<string | null> = writable(null);
 
 // studies per collection = aggregated values of studies_count -> getAggregatedPopulationForStratumCode()
 let abortController = new AbortController();
@@ -24,6 +25,8 @@ export const callBackend = async () => {
 	abortController.abort();
 	abortController = new AbortController();
 	clearSiteResults();
+	resultsStore.set([]);
+	backendErrorStore.set(null);
 
 	/** Helper function to base64 encode a UTF-8 string */
 	const base64Encode = (utf8String: string) =>
@@ -52,8 +55,12 @@ export const callBackend = async () => {
 			}
 		});
 	} catch (err) {
+		if (abortController.signal.aborted) {
+			return;
+		}
+		const message = err instanceof Error ? err.message : 'An error occurred while fetching results';
+		backendErrorStore.set(message);
 		console.error('Error calling querySpot:', err);
-		// Error is already handled in querySpot with mock response
 	}
 };
 

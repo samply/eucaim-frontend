@@ -1,6 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
 import { options } from '../config/options';
-import { mockQuerySpot } from './mock-response';
 
 export type SpotResult = {
 	body: string;
@@ -41,7 +40,8 @@ export async function querySpot(
 				sites,
 				query
 			}),
-			redirect: 'manual' // Used to detect redirects
+			redirect: 'manual', // Used to detect redirects
+			signal: signal
 		});
 
 		if (!response.ok) {
@@ -70,9 +70,10 @@ export async function querySpot(
 			resultCallback(result);
 		});
 	} catch (err) {
-		console.error('Backend call failed, using mock response:', err);
-
-		// Use mock response when backend fails
-		mockQuerySpot();
+		if (signal.aborted) {
+			return;
+		}
+		console.error('Backend call failed:', err);
+		throw err;
 	}
 }

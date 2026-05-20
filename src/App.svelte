@@ -15,7 +15,7 @@
 	import { options } from './config/options';
 	import { catalogueText, fetchData } from './services/catalogue.service';
 	import EucaimResultTable from './components/EucaimResultTable.svelte';
-	import { callBackend } from './services/backend.service';
+	import { callBackend, backendErrorStore } from './services/backend.service';
 
 	let catalogueopen = false;
 	let catalogueCollapsable = true;
@@ -119,6 +119,16 @@
 			<lens-search-button title="Search"></lens-search-button>
 		</div>
 	</div>
+	{#if $backendErrorStore}
+	<div class="error-container">
+		<div class="backend-error-message">
+			<span>{options?.backendErrorMessage ?? 'Something went wrong. Please contact support.'}</span>
+			<a href={options?.backendErrorHelpLink ?? 'https://dashboard.eucaim.cancerimage.eu/helpdesk'} target="_blank" rel="noopener noreferrer" class="helpdesk-link">
+				Visit the helpdesk
+			</a>
+		</div>
+	</div>
+	{:else}
 	<div class="grid">
 		<div class="catalogue-wrapper">
 			<div class="catalogue">
@@ -151,7 +161,7 @@
 			</div>
 		</div>
 	</div>
-
+	{/if}
 	<div class="credits">
 		<p>
 			This federated search was made with the open source <a
@@ -191,5 +201,38 @@
 
 	:global(.header-tooltip-icon:hover) {
 		opacity: 1;
+	}
+	.error-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 400px;
+		padding: 2rem;
+	}
+
+	.backend-error-message {
+		padding: 3rem;
+		background: rgba(255, 234, 234, 0.92);
+		border: 1px solid rgba(255, 128, 128, 0.8);
+		border-radius: 12px;
+		font-size: 1.25rem;
+		line-height: 1.6;
+		color: #8a1f1f;
+		max-width: 600px;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.backend-error-message :global(.helpdesk-link) {
+		color: #8a1f1f;
+		text-decoration: underline;
+		font-weight: 500;
+		transition: opacity 0.2s;
+	}
+
+	.backend-error-message :global(.helpdesk-link:hover) {
+		opacity: 0.8;
 	}
 </style>

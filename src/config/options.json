@@ -1,5 +1,8 @@
 {
     "spotUrl": "https://explorer.eucaim.cancerimage.eu/backend/",
+    "backendErrorMessage": "We're experiencing technical difficulties. Please reach out to our support team for assistance.",
+    "backendErrorHelpLink": "https://dashboard.eucaim.cancerimage.eu/helpdesk",
+    "backendErrorHelpLinkText": "Visit the helpdesk",
     "tableOptions": {
         "headerData": [
             {
