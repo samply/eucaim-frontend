@@ -111,7 +111,7 @@
 <main>
 	<div class="search">
 		<div class="search-wrapper">
-			<lens-search-bar-multiple noMatchesFoundMessage={'No collections found'}
+			<lens-search-bar-multiple noMatchesFoundMessage="No collections found"
 			></lens-search-bar-multiple>
 			<lens-query-explain-button
 				noQueryMessage="Query with no criteria selected: Searches for all collections."

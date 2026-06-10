@@ -24,7 +24,7 @@
 <table cellspacing="0" class="result-table">
 	<thead class="table-header">
 		<tr class="table-header-row">
-			{#each headerData as header}
+				{#each headerData as header, index (index)}
 				<th class="table-header-cell table-header-datatype">
 					{header.title}
 				</th>
@@ -33,8 +33,8 @@
 		</tr>
 	</thead>
 	<tbody class="table-body">
-		{#each response as provider, index1}
-			{#each provider.collections as tableRow, index2}
+		{#each response as provider, index1 (index1)}
+			{#each provider.collections as tableRow, index2 (index2)}
 				<tr
 					class="table-row"
 					class:expanded-row={expanded[index1.toString() + index2.toString()]}
