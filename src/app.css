@@ -448,4 +448,21 @@ lens-catalogue::part(query-explain-button-icon):hover {
 /* Chart Display */
 lens-chart::part(lens-chart-wrapper) {
   display: revert !important;
+
+}
+
+/* Fix so the lens-catalogue styles are applied correctly. */
+lens-catalogue::part(lens-data-tree-element-name) {
+  appearance: none;
+  background-color: unset;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xxs);
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-family);
+  color: var(--font-color);
+  font-size: var(--font-size-m);
+  text-align: left;
 }
