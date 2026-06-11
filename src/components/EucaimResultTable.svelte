@@ -24,7 +24,7 @@
 <table cellspacing="0" class="result-table">
 	<thead class="table-header">
 		<tr class="table-header-row">
-				{#each headerData as header, index (index)}
+			{#each headerData as header, index (index)}
 				<th class="table-header-cell table-header-datatype">
 					{header.title}
 				</th>
