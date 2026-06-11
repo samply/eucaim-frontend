@@ -36,8 +36,7 @@
                 "key": "SNOMEDCT423493009",
                 "name": "Age at Diagnosis",
                 "fieldType": "number",
-                "type": "BETWEEN",
-                "criteria": []
+                "type": "BETWEEN"
             }
         ]
     },
@@ -83,8 +82,7 @@
                 "key": "SNOMEDCT432213005",
                 "name": "Year of Diagnosis",
                 "fieldType": "number",
-                "type": "BETWEEN",
-                "criteria": []
+                "type": "BETWEEN"
             }
         ]
     },
@@ -651,7 +649,7 @@
                     }
                 ],
                 "fieldType": "single-select",
-                "key": "EUCAIM_Hyper-Ontology_V1.0.IMG1005459",
+                "key": "EUCAIM_Hyper-Ontology_V1.0.IMG1005457",
                 "name": "PI-RADS assessment",
                 "type": "EQUALS"
             }
