@@ -72,6 +72,25 @@
 			}
 		});
 	});
+
+	// Add tooltips to table headers after component mounts
+	onMount(() => {
+		const headers = document.querySelectorAll('.table-header-cell');
+		headers.forEach((header, index) => {
+			const headerData = options.tableOptions.headerData[index];
+			if (headerData && headerData.tooltip) {
+				// Create tooltip icon
+				const tooltipIcon = document.createElement('img');
+				tooltipIcon.src = options.iconOptions.infoUrl;
+				tooltipIcon.className = 'header-tooltip-icon';
+				tooltipIcon.title = headerData.tooltip;
+				tooltipIcon.alt = 'info';
+
+				// Append icon to header
+				header.appendChild(tooltipIcon);
+			}
+		});
+	});
 </script>
 
 <header>
