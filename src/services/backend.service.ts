@@ -24,6 +24,7 @@ export const callBackend = async () => {
 	abortController.abort();
 	abortController = new AbortController();
 	clearSiteResults();
+	resultsStore.set([]); // The backend service maintains a local resultStore that needs to be emptied, too
 
 	/** Helper function to base64 encode a UTF-8 string */
 	const base64Encode = (utf8String: string) =>
