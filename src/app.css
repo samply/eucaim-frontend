@@ -449,3 +449,8 @@ lens-catalogue::part(query-explain-button-icon):hover {
 lens-chart::part(lens-chart-wrapper) {
   display: revert !important;
 }
+
+/* Don't style the lens tree elements as native buttons. I think Tailwind now styles it weirdly*/
+lens-catalogue::part(lens-data-tree-element-name) {
+  appearance: none;
+}
