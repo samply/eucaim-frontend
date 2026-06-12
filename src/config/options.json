@@ -1,11 +1,5 @@
 {
-    "iconOptions": {
-        "deleteUrl": "delete_icon.svg",
-        "infoUrl": "info-circle-svgrepo-com.svg",
-        "selectAll": {
-            "text": "Add all"
-        }
-    },
+    "spotUrl": "https://explorer.eucaim.cancerimage.eu/backend/",
     "tableOptions": {
         "headerData": [
             {
@@ -23,38 +17,26 @@
             {
                 "title": "Subjects",
                 "dataKey": "subject_count",
-                "tooltip": "Not necessarily distinct subjects; subjects between different collections might not be de-duplicated."
-
+                "tooltip": "Not necessarily distinct subjects; subjects between different collections might not be de-duplicated.",
+                "comment": "ignore tooltip not allowed. This is nessesary for the tooltip feature, but not compatible with the schema."
             }
-        ],
-        "claimedText": "Processing..."
+        ]
     },
     "resultSummaryOptions": {
         "title": "Results",
         "dataTypes": [
             {
-                "title": "Collections",
+                "title": "Provider",
                 "dataKey": "collections"
             },
             {
-                "title": "Patienten",
-                "dataKey": "patients"
-            }
-        ]
-    },
-    "spots": [
+                "title": "Studies",
+                "dataKey": "studies"
+            },
             {
-                "name": "DKTK",
-                "backendMeasures": "DKTK_STRAT_DEF_IN_INITIAL_POPULATION",
-                "url": "",
-                "sites": [
-                ],
-                "catalogueKeyToResponseKeyMap": [
-                    [
-                        "Studies",
-                        "Studies"
-                    ]
-                ]
+                "title": "Subjects",
+                "dataKey": "subjects"
             }
         ]
+    }
 }
