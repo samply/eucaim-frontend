@@ -10,6 +10,8 @@ export type SpotResult = {
 	to: string[];
 };
 
+export const parseSpotResult = (raw: string): SpotResult => JSON.parse(raw) as SpotResult;
+
 /**
  * Use the spot API to send a query and listen for results.
  *
@@ -21,7 +23,7 @@ export async function querySpot(
 	query: string,
 	signal: AbortSignal,
 	resultCallback: (result: SpotResult) => void
-): Promise<void> {
+): Promise<void> {	
 	const url = options.spotUrl?.replace(/\/$/, '');
 	if (!url) {
 		throw new Error('Spot URL is not set in options.');
@@ -66,8 +68,7 @@ export async function querySpot(
 		});
 
 		eventSource.addEventListener('new_result', (message) => {
-			const result: SpotResult = JSON.parse(message.data);
-			resultCallback(result);
+			resultCallback(parseSpotResult(message.data));
 		});
 	} catch (err) {
 		console.error('Backend call failed, using mock response:', err);

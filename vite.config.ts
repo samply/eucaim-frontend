@@ -12,6 +12,12 @@ export default defineConfig({
 				target: 'http://localhost:1337',
 				changeOrigin: true,
 				rewrite: (path) => path.replace(/^\/api/, '')
+			},
+			'/catalogue-api': {
+				target: 'https://catalogue.eucaim.cancerimage.eu',
+				changeOrigin: true,
+				secure: true,
+				rewrite: (path) => path.replace(/^\/catalogue-api/, '')
 			}
 		}
 	},
