@@ -5,18 +5,27 @@
 	import { resultsStore } from '../services/backend.service';
 	import { collectionDetails } from '../services/collections.service';
 
-	const metaFields: { label: string; value: (m: DatasetMetadata) => string | undefined }[] = [
+	const metaFields: {
+		label: string;
+		value: (m: DatasetMetadata) => string | undefined;
+	}[] = [
 		{ label: 'Publisher', value: (m) => m.publisher || undefined },
 		{ label: 'Publisher type', value: (m) => m.publisherType || undefined },
 		{ label: 'Dataset type', value: (m) => m.datasetType || undefined },
 		{ label: 'Interoperability tier', value: (m) => m.interoperabilityTier || undefined },
 		{ label: 'Vendors', value: (m) => (m.vendors ? m.vendors.join(', ') : undefined) },
-		{ label: 'Access rights', value: (m) => (m.accessRights ? m.accessRights.join(', ') : undefined) },
+		{
+			label: 'Access rights',
+			value: (m) => (m.accessRights ? m.accessRights.join(', ') : undefined)
+		},
 		{ label: 'Access conditions', value: (m) => m.accessConditions || undefined },
 		{ label: 'Version', value: (m) => m.version || undefined },
 		{ label: 'Condition', value: (m) => m.condition || undefined },
 		{ label: 'Topography', value: (m) => m.topography || undefined },
-		{ label: 'Number of series', value: (m) => (m.numberOfSeries != null ? String(m.numberOfSeries) : undefined) },
+		{
+			label: 'Number of series',
+			value: (m) => (m.numberOfSeries != null ? String(m.numberOfSeries) : undefined)
+		},
 		{
 			label: 'Image year range',
 			value: (m) => {
@@ -25,19 +34,29 @@
 				return start ?? end;
 			}
 		},
-		{ label: 'Image size (GB)', value: (m) => (m.imageSizeGB != null ? String(m.imageSizeGB) : undefined) },
+		{
+			label: 'Image size (GB)',
+			value: (m) => (m.imageSizeGB != null ? String(m.imageSizeGB) : undefined)
+		},
 		{ label: 'Geographical coverage', value: (m) => m.geographicCoverage || undefined },
 		{
 			label: 'Collection methods',
 			value: (m) => (m.collectionMethods ? m.collectionMethods.join(', ') : undefined)
 		},
 		{ label: 'Provenance', value: (m) => m.provenance || undefined },
-		{ label: 'Intended purpose', value: (m) => (m.intendedPurpose ? m.intendedPurpose.join(' ') : undefined) },
+		{
+			label: 'Intended purpose',
+			value: (m) => (m.intendedPurpose ? m.intendedPurpose.join(' ') : undefined)
+		},
 		{
 			label: 'Commercial use',
-			value: (m) => (m.commercialUse === undefined ? undefined : m.commercialUse ? 'Yes' : 'No')
+			value: (m) =>
+				m.commercialUse === undefined ? undefined : m.commercialUse ? 'Yes' : 'No'
 		},
-		{ label: 'Applicable legislation', value: (m) => m.applicableLegislation || undefined },
+		{
+			label: 'Applicable legislation',
+			value: (m) => m.applicableLegislation || undefined
+		},
 		{ label: 'Legal basis', value: (m) => m.legalBasis || undefined }
 	];
 
@@ -81,7 +100,9 @@
 					class:expanded-row={expanded[index1.toString() + index2.toString()]}
 				>
 					<td class="table-cell table-cell-name" style="width:30%">
-						<a href="{catalogueLink}{tableRow.id}" target="_blank">{meta?.title ?? tableRow.name}</a>
+						<a href="{catalogueLink}{tableRow.id}" target="_blank"
+							>{meta?.title ?? tableRow.name}</a
+						>
 					</td>
 					<td class="table-cell" style="width:30%">
 						{#if provider.provider_icon}
@@ -93,8 +114,12 @@
 						{/if}
 						{provider.provider}</td
 					>
-					<td class="table-cell" style="width:18%">{meta?.numberOfStudies ?? tableRow.studies_count}</td>
-					<td class="table-cell" style="width:18%">{meta?.numberOfSubjects ?? tableRow.subjects_count}</td>
+					<td class="table-cell" style="width:18%"
+						>{meta?.numberOfStudies ?? tableRow.studies_count}</td
+					>
+					<td class="table-cell" style="width:18%"
+						>{meta?.numberOfSubjects ?? tableRow.subjects_count}</td
+					>
 					<td class="table-cell" style="width:4%">
 						<button
 							class="expand-button"
@@ -122,23 +147,25 @@
 										</tr>
 										<tr class="table-row">
 											<td class="collection-name">Gender: </td><td
-												class="collection-value">{(meta?.sex ?? tableRow.gender).join(', ')}</td
+												class="collection-value"
+												>{(meta?.sex ?? tableRow.gender).join(', ')}</td
 											>
 										</tr>
 										<tr class="table-row">
 											<td class="collection-name">Modality: </td><td
-												class="collection-value"
-												>{modalities.join(', ')}</td
+												class="collection-value">{modalities.join(', ')}</td
 											>
 										</tr>
 										<tr class="table-row">
 											<td class="collection-name">Body parts: </td><td
-												class="collection-value">{(meta?.bodyParts ?? tableRow.body_parts).join(', ')}</td
+												class="collection-value"
+												>{(meta?.bodyParts ?? tableRow.body_parts).join(', ')}</td
 											>
 										</tr>
 										<tr class="table-row">
 											<td class="collection-name">Description: </td><td
-												class="collection-value">{meta?.description ?? tableRow.description}</td
+												class="collection-value"
+												>{meta?.description ?? tableRow.description}</td
 											>
 										</tr>
 										{#if meta}

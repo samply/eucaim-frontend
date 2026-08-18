@@ -3,7 +3,8 @@ import { writable, type Writable } from 'svelte/store';
 import type { DatasetMetadata } from '../Types/types';
 
 const COLLECTIONS_URL = '/catalogue-api/Eucaim/api/rdf/Collections';
-const COLUMN = 'http://catalogue.eucaim.cancerimage.eu/Eucaim/api/rdf/Collections/column/';
+const COLUMN =
+	'http://catalogue.eucaim.cancerimage.eu/Eucaim/api/rdf/Collections/column/';
 const HOST = 'http://catalogue.eucaim.cancerimage.eu';
 const RDFS_LABEL = 'http://www.w3.org/2000/01/rdf-schema#label';
 const MAX_CONCURRENT_FETCHES = 6;
@@ -35,7 +36,10 @@ const releaseFetchSlot = (): void => {
 	}
 };
 
-const limitedFetchText = async (url: string, signal?: AbortSignal): Promise<string | null> => {
+const limitedFetchText = async (
+	url: string,
+	signal?: AbortSignal
+): Promise<string | null> => {
 	await acquireFetchSlot();
 	try {
 		const response = await fetch(url, { signal });
@@ -64,8 +68,12 @@ const resolveLabel = async (uri: string, signal?: AbortSignal): Promise<string> 
 			if (text !== null) {
 				const store = new Store(new Parser().parse(text));
 				const labelColumn = `${uri.split('?')[0]}/column/label`;
-				const fromColumn = store.getObjects(null, labelColumn, null).map((term) => term.value);
-				const fromRdfs = store.getObjects(null, RDFS_LABEL, null).map((term) => term.value);
+				const fromColumn = store
+					.getObjects(null, labelColumn, null)
+					.map((term) => term.value);
+				const fromRdfs = store
+					.getObjects(null, RDFS_LABEL, null)
+					.map((term) => term.value);
 				const label =
 					fromColumn[0] ??
 					fromRdfs.find((value) => value !== code && !value.startsWith('http')) ??
@@ -126,10 +134,15 @@ const parseCollection = async (
 
 	const yearRange = values('image_year_range');
 	const start =
-		yearRange.find((value) => value.startsWith('startDate'))?.replace('startDate:', '').trim() ||
-		undefined;
+		yearRange
+			.find((value) => value.startsWith('startDate'))
+			?.replace('startDate:', '')
+			.trim() || undefined;
 	const end =
-		yearRange.find((value) => value.startsWith('endDate'))?.replace('endDate:', '').trim() || undefined;
+		yearRange
+			.find((value) => value.startsWith('endDate'))
+			?.replace('endDate:', '')
+			.trim() || undefined;
 
 	const labels = {
 		condition: labelFirst('condition'),
@@ -190,7 +203,10 @@ export const fetchCollection = async (
 	signal?: AbortSignal
 ): Promise<DatasetMetadata | null> => {
 	try {
-		const turtle = await limitedFetchText(`${COLLECTIONS_URL}?id=${encodeURIComponent(id)}`, signal);
+		const turtle = await limitedFetchText(
+			`${COLLECTIONS_URL}?id=${encodeURIComponent(id)}`,
+			signal
+		);
 		return turtle === null ? null : await parseCollection(turtle, id, signal);
 	} catch {
 		return null;

@@ -23,7 +23,7 @@ export async function querySpot(
 	query: string,
 	signal: AbortSignal,
 	resultCallback: (result: SpotResult) => void
-): Promise<void> {	
+	): Promise<void> {
 	const url = options.spotUrl?.replace(/\/$/, '');
 	if (!url) {
 		throw new Error('Spot URL is not set in options.');
