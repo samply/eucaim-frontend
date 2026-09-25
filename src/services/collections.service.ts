@@ -1,13 +1,20 @@
 import { Parser, Store } from 'n3';
 import { writable, type Writable } from 'svelte/store';
+import { catalogueUrl } from '../config/options';
 import type { DatasetMetadata } from '../Types/types';
 
-const COLLECTIONS_URL = '/catalogue-api/Eucaim/api/rdf/Collections';
-const COLUMN =
-	'http://catalogue.eucaim.cancerimage.eu/Eucaim/api/rdf/Collections/column/';
-const HOST = 'http://catalogue.eucaim.cancerimage.eu';
+const CATALOGUE_PROXY = '/catalogue-api';
+const COLLECTIONS_URL = `${CATALOGUE_PROXY}/Eucaim/api/rdf/Collections`;
+const RDF_NAMESPACE = 'http://catalogue.eucaim.cancerimage.eu/Eucaim/api/rdf/';
+const COLUMN = `${RDF_NAMESPACE}Collections/column/`;
 const RDFS_LABEL = 'http://www.w3.org/2000/01/rdf-schema#label';
 const MAX_CONCURRENT_FETCHES = 6;
+
+const catalogueHostPattern = new RegExp(
+	`^https?://${new URL(catalogueUrl).host.replace(/\./g, '\\.')}`
+);
+const toProxyUrl = (uri: string): string =>
+	uri.replace(catalogueHostPattern, CATALOGUE_PROXY);
 
 export const collectionDetails: Writable<Record<string, DatasetMetadata>> = writable({});
 
@@ -64,7 +71,7 @@ const resolveLabel = async (uri: string, signal?: AbortSignal): Promise<string> 
 	const code = nameFromUri(uri);
 	const resolution = (async () => {
 		try {
-			const text = await limitedFetchText(uri.replace(HOST, '/catalogue-api'), signal);
+			const text = await limitedFetchText(toProxyUrl(uri), signal);
 			if (text !== null) {
 				const store = new Store(new Parser().parse(text));
 				const labelColumn = `${uri.split('?')[0]}/column/label`;
@@ -81,9 +88,12 @@ const resolveLabel = async (uri: string, signal?: AbortSignal): Promise<string> 
 				labelCache.set(uri, label);
 				return label;
 			}
-		} catch {
-			return code;
+			console.error(`Catalogue label lookup failed for ${uri}, falling back to ${code}`);
+		} catch (err) {
+			if (signal?.aborted) return code;
+			console.error(`Catalogue label lookup failed for ${uri}:`, err);
 		}
+		labelCache.set(uri, code);
 		return code;
 	})();
 
@@ -132,18 +142,6 @@ const parseCollection = async (
 
 	if (first('id') === undefined) return null;
 
-	const yearRange = values('image_year_range');
-	const start =
-		yearRange
-			.find((value) => value.startsWith('startDate'))
-			?.replace('startDate:', '')
-			.trim() || undefined;
-	const end =
-		yearRange
-			.find((value) => value.startsWith('endDate'))
-			?.replace('endDate:', '')
-			.trim() || undefined;
-
 	const labels = {
 		condition: labelFirst('condition'),
 		topography: labelFirst('topography'),
@@ -158,7 +156,6 @@ const parseCollection = async (
 		accessRights: labelList('image_access_type'),
 		contactId: labelFirst('contact')
 	};
-	await Promise.all(Object.values(labels));
 
 	return {
 		id,
@@ -177,8 +174,8 @@ const parseCollection = async (
 		modalities: await labels.modalities,
 		vendors: await labels.vendors,
 		format: list('format'),
-		imageYearRange: start || end ? { start, end } : undefined,
-		imageSizeGB: num('image_size'),
+		imageYearRange: list('image_year_range')?.join(', '),
+		imageSize: first('image_size'),
 		sex: await labels.sex,
 		geographicCoverage: await labels.geographicCoverage,
 		datasetType: await labels.datasetType,
@@ -207,8 +204,15 @@ export const fetchCollection = async (
 			`${COLLECTIONS_URL}?id=${encodeURIComponent(id)}`,
 			signal
 		);
-		return turtle === null ? null : await parseCollection(turtle, id, signal);
-	} catch {
+		if (turtle === null) {
+			console.error(`Catalogue lookup failed for collection ${id}`);
+			return null;
+		}
+		return await parseCollection(turtle, id, signal);
+	} catch (err) {
+		if (!signal?.aborted) {
+			console.error(`Catalogue lookup failed for collection ${id}:`, err);
+		}
 		return null;
 	}
 };

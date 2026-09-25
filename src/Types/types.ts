@@ -39,8 +39,8 @@ export type DatasetMetadata = {
 	modalities?: string[];
 	vendors?: string[];
 	format?: string[];
-	imageYearRange?: { start?: string; end?: string };
-	imageSizeGB?: number;
+	imageYearRange?: string;
+	imageSize?: string;
 	sex?: string[];
 	geographicCoverage?: string;
 	datasetType?: string;

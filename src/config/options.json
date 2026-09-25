@@ -1,5 +1,6 @@
 {
     "spotUrl": "https://explorer.eucaim.cancerimage.eu/backend/",
+    "catalogueUrl": "https://catalogue.eucaim.cancerimage.eu",
     "tableOptions": {
         "headerData": [
             {

@@ -7,3 +7,8 @@ export let options: LensOptions = optionsProd;
 if (import.meta.env.VITE_TARGET_ENVIRONMENT === 'staging') {
 	options = optionsTest;
 }
+
+export const catalogueUrl: string =
+	typeof options.catalogueUrl === 'string'
+		? options.catalogueUrl.replace(/\/$/, '')
+		: 'https://catalogue.eucaim.cancerimage.eu';

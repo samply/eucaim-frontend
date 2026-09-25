@@ -26,18 +26,8 @@
 			label: 'Number of series',
 			value: (m) => (m.numberOfSeries != null ? String(m.numberOfSeries) : undefined)
 		},
-		{
-			label: 'Image year range',
-			value: (m) => {
-				const { start, end } = m.imageYearRange ?? {};
-				if (start && end) return start === end ? start : `${start} to ${end}`;
-				return start ?? end;
-			}
-		},
-		{
-			label: 'Image size (GB)',
-			value: (m) => (m.imageSizeGB != null ? String(m.imageSizeGB) : undefined)
-		},
+		{ label: 'Image year range', value: (m) => m.imageYearRange || undefined },
+		{ label: 'Image size', value: (m) => m.imageSize || undefined },
 		{ label: 'Geographical coverage', value: (m) => m.geographicCoverage || undefined },
 		{
 			label: 'Collection methods',
@@ -114,12 +104,8 @@
 						{/if}
 						{provider.provider}</td
 					>
-					<td class="table-cell" style="width:18%"
-						>{meta?.numberOfStudies ?? tableRow.studies_count}</td
-					>
-					<td class="table-cell" style="width:18%"
-						>{meta?.numberOfSubjects ?? tableRow.subjects_count}</td
-					>
+					<td class="table-cell" style="width:18%">{tableRow.studies_count}</td>
+					<td class="table-cell" style="width:18%">{tableRow.subjects_count}</td>
 					<td class="table-cell" style="width:4%">
 						<button
 							class="expand-button"

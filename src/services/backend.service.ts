@@ -8,7 +8,6 @@ import {
 } from '@samply/lens';
 import { querySpot } from './spot';
 import { fetchCollection, collectionDetails } from './collections.service';
-// import testDatasetIds from './test-dataset-ids.json';
 import { writable, type Writable } from 'svelte/store';
 import type { Provider } from '../Types/types';
 
@@ -63,13 +62,6 @@ export const callBackend = async () => {
 				console.error(`Site ${site} failed with status ${result.status}:`, result.body);
 			}
 		});
-
-		// testDatasetIds.forEach(async (dataset) => {
-		// 	const details = await fetchCollection(dataset.id);
-		// 	if (details) {
-		// 		collectionDetails.update((prev) => ({ ...prev, [dataset.id]: details }));
-		// 	}
-		// });
 	} catch (err) {
 		console.error('Error calling querySpot:', err);
 		// Error is already handled in querySpot with mock response

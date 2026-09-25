@@ -28,6 +28,7 @@
 		"@sveltejs/kit": "^2.64.0",
 		"@sveltejs/vite-plugin-svelte": "^6.2.4",
 		"@types/eslint": "^8.56.0",
+		"@types/n3": "^1.26.1",
 		"@typescript-eslint/eslint-plugin": "^8.57.0",
 		"@typescript-eslint/parser": "^8.57.0",
 		"eslint": "^9.39.4",
@@ -49,7 +50,6 @@
 	"dependencies": {
 		"@samply/lens": "^0.6.8",
 		"@sveltejs/adapter-node": "^5.2.9",
-		"@types/n3": "^1.26.1",
 		"cookie": "^1.1.1",
 		"devalue": "^5.6.0",
 		"n3": "^2.1.0",
