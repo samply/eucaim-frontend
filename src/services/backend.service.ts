@@ -7,6 +7,7 @@ import {
 	type LensResult
 } from '@samply/lens';
 import { querySpot } from './spot';
+import { fetchCollection, collectionDetails } from './collections.service';
 import { writable, type Writable } from 'svelte/store';
 import type { Provider } from '../Types/types';
 
@@ -23,8 +24,10 @@ export const callBackend = async () => {
 	);
 	abortController.abort();
 	abortController = new AbortController();
+	const { signal } = abortController;
 	clearSiteResults();
 	resultsStore.set([]); // The backend service maintains its own local resultStore that needs to be emptied
+	collectionDetails.set({});
 
 	/** Helper function to base64 encode a UTF-8 string */
 	const base64Encode = (utf8String: string) =>
@@ -38,15 +41,22 @@ export const callBackend = async () => {
 	);
 
 	try {
-		await querySpot(query, abortController.signal, (result) => {
+		await querySpot(query, signal, (result) => {
 			const site = result.from.split('.')[1];
 			if (result.status === 'claimed') {
 				markSiteClaimed(site);
 			} else if (result.status === 'succeeded') {
-				const siteResult = JSON.parse(atob(result.body));
+				const siteResult: Provider = JSON.parse(atob(result.body));
 				resultsStore.update((prev) => [...prev, siteResult]);
 				const parsedResponse: LensResult = transformResponse(siteResult);
 				setSiteResult(site, parsedResponse);
+
+				siteResult.collections.forEach(async (collection) => {
+					const details = await fetchCollection(collection.id, signal);
+					if (details && !signal.aborted) {
+						collectionDetails.update((prev) => ({ ...prev, [collection.id]: details }));
+					}
+				});
 			} else {
 				removeFailedSite(site);
 				console.error(`Site ${site} failed with status ${result.status}:`, result.body);

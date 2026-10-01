@@ -1,8 +1,54 @@
 <script lang="ts">
-	import type { Provider } from '../Types/types';
+	import type { Provider, DatasetMetadata } from '../Types/types';
 	import { options } from '../config/options';
 	import type { HeaderData } from '@samply/lens';
 	import { resultsStore } from '../services/backend.service';
+	import { collectionDetails } from '../services/collections.service';
+
+	const metaFields: {
+		label: string;
+		value: (m: DatasetMetadata) => string | undefined;
+	}[] = [
+		{ label: 'Publisher', value: (m) => m.publisher || undefined },
+		{ label: 'Publisher type', value: (m) => m.publisherType || undefined },
+		{ label: 'Dataset type', value: (m) => m.datasetType || undefined },
+		{ label: 'Interoperability tier', value: (m) => m.interoperabilityTier || undefined },
+		{ label: 'Vendors', value: (m) => (m.vendors ? m.vendors.join(', ') : undefined) },
+		{
+			label: 'Access rights',
+			value: (m) => (m.accessRights ? m.accessRights.join(', ') : undefined)
+		},
+		{ label: 'Access conditions', value: (m) => m.accessConditions || undefined },
+		{ label: 'Version', value: (m) => m.version || undefined },
+		{ label: 'Condition', value: (m) => m.condition || undefined },
+		{ label: 'Topography', value: (m) => m.topography || undefined },
+		{
+			label: 'Number of series',
+			value: (m) => (m.numberOfSeries != null ? String(m.numberOfSeries) : undefined)
+		},
+		{ label: 'Image year range', value: (m) => m.imageYearRange || undefined },
+		{ label: 'Image size', value: (m) => m.imageSize || undefined },
+		{ label: 'Geographical coverage', value: (m) => m.geographicCoverage || undefined },
+		{
+			label: 'Collection methods',
+			value: (m) => (m.collectionMethods ? m.collectionMethods.join(', ') : undefined)
+		},
+		{ label: 'Provenance', value: (m) => m.provenance || undefined },
+		{
+			label: 'Intended purpose',
+			value: (m) => (m.intendedPurpose ? m.intendedPurpose.join(' ') : undefined)
+		},
+		{
+			label: 'Commercial use',
+			value: (m) =>
+				m.commercialUse === undefined ? undefined : m.commercialUse ? 'Yes' : 'No'
+		},
+		{
+			label: 'Applicable legislation',
+			value: (m) => m.applicableLegislation || undefined
+		},
+		{ label: 'Legal basis', value: (m) => m.legalBasis || undefined }
+	];
 
 	let response: Provider[] = $state([]);
 	let expanded = $state<Record<string, boolean>>({});
@@ -35,12 +81,18 @@
 	<tbody class="table-body">
 		{#each response as provider, index1 (index1)}
 			{#each provider.collections as tableRow, index2 (index2)}
+				{@const meta = $collectionDetails[tableRow.id]}
+				{@const modalities = meta?.modalities?.length
+					? meta.modalities
+					: [...new Set([...(tableRow.modality ?? []), ...(tableRow.modalities ?? [])])]}
 				<tr
 					class="table-row"
 					class:expanded-row={expanded[index1.toString() + index2.toString()]}
 				>
 					<td class="table-cell table-cell-name" style="width:30%">
-						<a href="{catalogueLink}{tableRow.id}" target="_blank">{tableRow.name}</a>
+						<a href="{catalogueLink}{tableRow.id}" target="_blank"
+							>{meta?.title ?? tableRow.name}</a
+						>
 					</td>
 					<td class="table-cell" style="width:30%">
 						{#if provider.provider_icon}
@@ -81,31 +133,39 @@
 										</tr>
 										<tr class="table-row">
 											<td class="collection-name">Gender: </td><td
-												class="collection-value">{tableRow.gender.join(', ')}</td
+												class="collection-value"
+												>{(meta?.sex ?? tableRow.gender).join(', ')}</td
 											>
 										</tr>
 										<tr class="table-row">
-											{#if tableRow.modality}
-												<td class="collection-name">Modality: </td><td
-													class="collection-value">{tableRow.modality.join(', ')}</td
-												>
-											{/if}
-											{#if tableRow.modalities}
-												<td class="collection-name">Modality: </td><td
-													class="collection-value">{tableRow.modalities.join(', ')}</td
-												>
-											{/if}
+											<td class="collection-name">Modality: </td><td
+												class="collection-value">{modalities.join(', ')}</td
+											>
 										</tr>
 										<tr class="table-row">
 											<td class="collection-name">Body parts: </td><td
-												class="collection-value">{tableRow.body_parts.join(', ')}</td
+												class="collection-value"
+												>{(meta?.bodyParts ?? tableRow.body_parts).join(', ')}</td
 											>
 										</tr>
 										<tr class="table-row">
 											<td class="collection-name">Description: </td><td
-												class="collection-value">{tableRow.description}</td
+												class="collection-value"
+												>{meta?.description ?? tableRow.description}</td
 											>
 										</tr>
+										{#if meta}
+											{#each metaFields as field (field.label)}
+												{@const value = field.value(meta)}
+												{#if value !== undefined}
+													<tr class="table-row">
+														<td class="collection-name">{field.label}: </td><td
+															class="collection-value">{value}</td
+														>
+													</tr>
+												{/if}
+											{/each}
+										{/if}
 									</tbody>
 								</table>
 							</div>
