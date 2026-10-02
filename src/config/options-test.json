@@ -1,5 +1,6 @@
 {
-    "spotUrl": "http://localhost:8055", 
+    "spotUrl": "http://localhost:8055",
+    "catalogueUrl": "https://catalogue.eucaim.cancerimage.eu",
     "catalogueKeyToResponseKeyMap": [
         [
             "Studies",
