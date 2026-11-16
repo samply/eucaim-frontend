@@ -149,13 +149,58 @@
                         "key": "SNOMEDCT41216001",
                         "name": "Prostate",
                         "description": "Prostate"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.BP1000173",
+                        "name": "Abdomen",
+                        "description": "Abdomen"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.BP1000067",
+                        "name": "Chest",
+                        "description": "Chest"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.BP1000145",
+                        "name": "Entire body",
+                        "description": "Entire body"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.BP1000171",
+                        "name": "Extremity",
+                        "description": "Extremity"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.BP1000120",
+                        "name": "Head",
+                        "description": "Head"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.BP1000075",
+                        "name": "Heart",
+                        "description": "Heart"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.BP1000105",
+                        "name": "Liver",
+                        "description": "Liver"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.BP1000121",
+                        "name": "Neck",
+                        "description": "Neck"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.BP1000077",
+                        "name": "Spine",
+                        "description": "Spine"
                     }
                 ]
             },
             {
                 "key": "C25392",
                 "name": "Manufacturer",
-                "fieldType": "single-select",
+                "fieldType": "autocomplete",
                 "type": "EQUALS",
                 "criteria": [
                     {
@@ -182,6 +227,71 @@
                         "key": "birnlex_3067",
                         "name": "Toshiba Medical Solutions",
                         "description": "Toshiba Medical Solutions"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.IMG1000052",
+                        "name": "ADAC",
+                        "description": "ADAC"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.IMG1000051",
+                        "name": "Agfa",
+                        "description": "Agfa"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.IMG1000050",
+                        "name": "Canon",
+                        "description": "Canon"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.IMG1000055",
+                        "name": "Elscint",
+                        "description": "Elscint"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.IMG1000049",
+                        "name": "Esaote",
+                        "description": "Esaote"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.IMG1000060",
+                        "name": "Fujifilm",
+                        "description": "Fujifilm"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.IMG1000057",
+                        "name": "Hitachi",
+                        "description": "Hitachi"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.IMG1000048",
+                        "name": "I.M.S.",
+                        "description": "I.M.S."
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.IMG1000053",
+                        "name": "Marconi",
+                        "description": "Marconi"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.IMG1000056",
+                        "name": "Mediso",
+                        "description": "Mediso"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.IMG1000058",
+                        "name": "MiE",
+                        "description": "MiE"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.IMG1000059",
+                        "name": "Picker International",
+                        "description": "Picker International"
+                    },
+                    {
+                        "key": "EUCAIM_Hyper-Ontology_V1.0.IMG1000054",
+                        "name": "Shimadzu",
+                        "description": "Shimadzu"
                     }
                 ]
             }
